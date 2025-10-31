@@ -18,23 +18,32 @@
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="hero" style="display:grid; grid-template-columns:1fr 1fr; align-items:center; min-height:80vh; text-align:left;">
-  <div class="hero-content">
-    <h1 class="h1">Walks You Can Trust</h1>
-    <p class="sub">Discover vetted walkers, explore local parks, and join a community built for pups and their people.</p>
-    <div style="margin-top: var(--space-4);">
-      <a href="pricing.html" class="btn btn-primary">Start Free Trial</a>
-      <a href="feed.html" class="btn btn-secondary">Join Community</a>
+  <!-- Hero (Split Layout) -->
+  <section class="hero section" style="display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:var(--space-6);">
+    <div class="hero-content" style="text-align:left;">
+      <h1 class="h1">Walks You Can Trust</h1>
+      <p class="sub">Discover vetted walkers, explore local parks, and join a community built for pups and their people.</p>
+      <div style="margin-top: var(--space-4);">
+        <a href="pricing.html" class="btn btn-primary">Start Free Trial</a>
+        <a href="feed.html" class="btn btn-secondary">Join Community</a>
+      </div>
     </div>
-  </div>
-  <div style="position:relative;">
-    <img src="https://static.vecteezy.com/system/resources/previews/053/725/081/large_2x/dog-walking-in-park-pet-run-along-path-nature-cute-animal-face-photo.jpg" 
-         alt="Dog walking in park" 
-         style="width:100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); object-fit:cover;">
-  </div>
-</section>
+    <div>
+      <img src="https://static.vecteezy.com/system/resources/previews/053/725/081/large_2x/dog-walking-in-park-pet-run-along-path-nature-cute-animal-face-photo.jpg" 
+           alt="Dog walking in park" 
+           style="width:100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); object-fit:cover;">
+    </div>
+  </section>
 
+  <!-- Trust Logos -->
+  <section class="section-tight center">
+    <p class="sub">Trusted by dog owners and walkers across the UK</p>
+    <div class="grid-3" style="margin-top:var(--space-4); opacity:0.8;">
+      <div>🐶 Kennel Club</div>
+      <div>🌍 Local Parks Assoc.</div>
+      <div>⭐ 5,000+ Happy Walkers</div>
+    </div>
+  </section>
 
   <!-- Features -->
   <section class="section">
@@ -56,6 +65,34 @@
           <h3 class="h3">Community Feed</h3>
           <p>Share walks, photos, and tips in a vibrant, ad‑free social feed.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section banner banner-info">
+    <div class="container center">
+      <h2 class="h2">Loved by Walkers & Owners</h2>
+      <div class="grid-2" style="margin-top:var(--space-4); text-align:left;">
+        <div class="card">
+          <p>“Pups & Parks™ made it so easy to find trusted walkers. My dog loves every walk!”</p>
+          <p class="muted">— Emily, Dog Owner</p>
+        </div>
+        <div class="card">
+          <p>“As a walker, I get instant bookings and payouts. The dashboard is a game‑changer.”</p>
+          <p class="muted">— James, Walker</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section-tight center">
+    <div class="card lift glow">
+      <h2 class="h2">Ready to Join the Pack?</h2>
+      <p class="sub">Start your free trial today and unlock trusted walks, park discovery, and community.</p>
+      <div style="margin-top: var(--space-4);">
+        <a href="pricing.html" class="btn btn-primary btn-pill">Start Free Trial</a>
       </div>
     </div>
   </section>
