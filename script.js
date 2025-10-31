@@ -1,15 +1,26 @@
 const cursor = document.querySelector('.cursor');
-const orbs = document.querySelectorAll('.orb');
 
 document.addEventListener('mousemove', e => {
+  // move main cursor
   cursor.style.left = e.pageX + 'px';
   cursor.style.top = e.pageY + 'px';
 
-  const x = (e.clientX / window.innerWidth - 0.5) * 30;
-  const y = (e.clientY / window.innerHeight - 0.5) * 30;
+  // create sparks
+  for (let i = 0; i < 3; i++) {
+    const spark = document.createElement('div');
+    spark.className = 'spark';
+    spark.style.left = e.pageX + 'px';
+    spark.style.top = e.pageY + 'px';
 
-  orbs.forEach((orb, i) => {
-    const speed = (i + 1) * 0.3;
-    orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-  });
+    // random scatter direction
+    const dx = (Math.random() - 0.5) * 60 + 'px';
+    const dy = (Math.random() - 0.5) * 60 + 'px';
+    spark.style.setProperty('--dx', dx);
+    spark.style.setProperty('--dy', dy);
+
+    document.body.appendChild(spark);
+
+    // remove after animation
+    spark.addEventListener('animationend', () => spark.remove());
+  }
 });
