@@ -1,8 +1,63 @@
-<section class="feed container">
-  <h2>Community Feed</h2>
-  <form id="postForm">
-    <textarea id="postContent" placeholder="Share your walk, park, or pup story..."></textarea>
-    <button type="submit">Post</button>
-  </form>
-  <div id="posts"></div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Community Feed — Pups & Parks™</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" />
+      <span>Pups & Parks™</span>
+    </a>
+    <nav aria-label="Primary" class="nav">
+      <a href="index.html">Home</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="feed.html" class="active">Community Feed</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="feed-header">
+      <h1>Community feed</h1>
+      <p>Share your walks, park tips, and pup stories. Be kind. No ads or spam.</p>
+    </section>
+
+    <section class="card composer">
+      <form id="postForm" aria-label="Create a post">
+        <label class="sr-only" for="postContent">Post content</label>
+        <textarea id="postContent" placeholder="Share your walk, park, or pup story..." maxlength="500"></textarea>
+        <div class="composer-actions">
+          <button type="submit" class="btn btn-primary">Post</button>
+          <span id="charCount" class="muted">0 / 500</span>
+        </div>
+      </form>
+    </section>
+
+    <section id="posts" class="feed-list"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <img src="./assets/img/logo.svg" alt="Pups & Parks logo small" />
+        <span>Pups & Parks™</span>
+      </div>
+      <nav aria-label="Footer" class="footer-nav">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="feed.html">Community</a>
+      </nav>
+    </div>
+    <p class="legal">© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
+  </footer>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
