@@ -1,12 +1,4 @@
-
-/* Smooth anchor scroll for buttons */
-document.querySelectorAll('a[href^="#"], button[onclick*="scrollIntoView"]').forEach(el => {
-  el.addEventListener('click', (e) => {
-    // allow default if using location.href
-  });
-});
-
-/* Trial banner (pricing) — demo via localStorage) */
+/* Trial banner — demo via localStorage */
 (function initTrialBanner() {
   const banner = document.getElementById('trialBanner');
   const countdown = document.getElementById('trialCountdown');
@@ -16,38 +8,33 @@ document.querySelectorAll('a[href^="#"], button[onclick*="scrollIntoView"]').for
   const now = Date.now();
   let trialEnds = Number(localStorage.getItem('trialEndsAt') || 0);
 
-  const formatDays = (msLeft) => {
-    const days = Math.max(0, Math.ceil(msLeft / (1000 * 60 * 60 * 24)));
-    return `${days} day${days !== 1 ? 's' : ''} left`;
-  };
-
-  const setBanner = () => {
+  const daysLeft = (msLeft) => Math.max(0, Math.ceil(msLeft / (1000 * 60 * 60 * 24)));
+  const renderBanner = () => {
     const msLeft = trialEnds - Date.now();
+    const d = daysLeft(msLeft);
     if (msLeft > 0) {
-      countdown.textContent = formatDays(msLeft);
+      countdown.textContent = `${d} day${d !== 1 ? 's' : ''} left`;
       banner.hidden = false;
     } else {
       banner.hidden = true;
     }
   };
 
-  if (startBtn) {
-    startBtn.addEventListener('click', () => {
-      const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
-      trialEnds = Date.now() + sevenDaysMs;
-      localStorage.setItem('trialEndsAt', String(trialEnds));
-      setBanner();
-      alert('🎉 Your 7‑day free trial has started!');
-    });
-  }
+  startBtn?.addEventListener('click', () => {
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+    trialEnds = Date.now() + sevenDays;
+    localStorage.setItem('trialEndsAt', String(trialEnds));
+    renderBanner();
+    alert('🎉 Your 7‑day free trial has started!');
+  });
 
   if (trialEnds > now) {
-    setBanner();
-    setInterval(setBanner, 60 * 60 * 1000);
+    renderBanner();
+    setInterval(renderBanner, 60 * 60 * 1000);
   }
 })();
 
-/* Community feed — local demo */
+/* Feed — local demo storage */
 (function initFeed() {
   const form = document.getElementById('postForm');
   const content = document.getElementById('postContent');
@@ -55,14 +42,11 @@ document.querySelectorAll('a[href^="#"], button[onclick*="scrollIntoView"]').for
   const posts = document.getElementById('posts');
   if (!form || !content || !posts) return;
 
-  const loadPosts = () => {
-    const raw = localStorage.getItem('pp_posts');
-    return raw ? JSON.parse(raw) : [];
-  };
-  const savePosts = (list) => localStorage.setItem('pp_posts', JSON.stringify(list));
+  const load = () => JSON.parse(localStorage.getItem('pp_posts') || '[]');
+  const save = (list) => localStorage.setItem('pp_posts', JSON.stringify(list));
 
   const render = () => {
-    const list = loadPosts();
+    const list = load();
     posts.innerHTML = '';
     list.slice().reverse().forEach((p) => {
       const el = document.createElement('article');
@@ -84,7 +68,7 @@ document.querySelectorAll('a[href^="#"], button[onclick*="scrollIntoView"]').for
       el.querySelectorAll('.pill').forEach((btn) => {
         btn.addEventListener('click', () => {
           const action = btn.getAttribute('data-action');
-          const listNow = loadPosts();
+          const listNow = load();
           const idx = listNow.findIndex((i) => i.ts === p.ts);
           const item = listNow[idx];
           if (!item) return;
@@ -93,7 +77,7 @@ document.querySelectorAll('a[href^="#"], button[onclick*="scrollIntoView"]').for
           if (action === 'flag') alert('Reported — moderators will review.');
           if (action === 'hide') item.hidden = !item.hidden;
           if (action === 'delete') listNow.splice(idx, 1);
-          savePosts(listNow);
+          save(listNow);
           render();
         });
       });
@@ -109,9 +93,9 @@ document.querySelectorAll('a[href^="#"], button[onclick*="scrollIntoView"]').for
     e.preventDefault();
     const text = content.value.trim();
     if (!text) return;
-    const list = loadPosts();
+    const list = load();
     list.push({ ts: Date.now(), text, likes: 0, cheers: 0, hidden: false, author: 'You' });
-    savePosts(list);
+    save(list);
     content.value = '';
     charCount.textContent = `0 / ${content.maxLength}`;
     render();
@@ -120,7 +104,7 @@ document.querySelectorAll('a[href^="#"], button[onclick*="scrollIntoView"]').for
   render();
 })();
 
-/* Contact form — demo feedback */
+/* Contact — demo feedback */
 (function initContact() {
   const form = document.getElementById('contactForm');
   const status = document.getElementById('contactStatus');
