@@ -3,65 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pricing — Pups & Parks™</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; margin:0; background:#F8FAFC; color:#0F172A; }
-    header { background:#2563EB; color:#fff; padding:1rem; display:flex; justify-content:space-between; align-items:center; }
-    header a { color:#fff; text-decoration:none; font-weight:700; margin-left:1rem; }
-    .container { max-width:960px; margin:2rem auto; padding:0 1rem; }
-    h1 { font-size:2rem; font-weight:800; margin-bottom:1rem; }
-    .card { background:#fff; border:1px solid #E2E8F0; border-radius:14px; padding:1.5rem; box-shadow:0 6px 18px rgba(2,6,23,0.1); margin-bottom:1.5rem; }
-    .price { font-size:1.8rem; font-weight:800; color:#2563EB; }
-    .btn { display:inline-block; padding:.8rem 1.2rem; border-radius:12px; font-weight:800; text-decoration:none; }
-    .btn-primary { background:#22C55E; color:#fff; }
-    .btn-primary:hover { background:#16A34A; }
-    .btn-secondary { background:#fff; border:2px solid #2563EB; color:#2563EB; }
-    footer { background:#0F172A; color:#CBD5E1; text-align:center; padding:1rem; margin-top:2rem; }
-  </style>
+  <title>Pups & Parks™ — Pricing</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <div><strong>Pups & Parks™</strong></div>
-    <nav>
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="logo">🐾 Pups & Parks™</a>
+    <nav class="nav">
       <a href="index.html">Home</a>
-      <a href="pricing.html" style="text-decoration:underline">Pricing</a>
+      <a href="pricing.html" class="active">Pricing</a>
       <a href="feed.html">Community</a>
       <a href="profile.html">Profile</a>
     </nav>
   </header>
 
-  <main class="container">
-    <h1>Simple, transparent pricing</h1>
-    <p>No ads, no hidden fees, no commissions. Owners book free. Walkers pay one flat monthly fee.</p>
-
-    <div class="card">
-      <h2>Walkers</h2>
-      <p class="price">£25/month</p>
-      <ul>
-        <li>Keep 100% of your earnings</li>
-        <li>7‑day free trial</li>
-        <li>Trust dashboard & booking tools</li>
-        <li>Access to community feed</li>
-      </ul>
-      <!-- 👇 Replace the URL below with your real Stripe Checkout link -->
-      <a href="https://buy.stripe.com/test_12345ABCDE" class="btn btn-primary">Start Free Trial</a>
+  <!-- Hero -->
+  <section class="hero hero-image">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="h1">Simple, Transparent Pricing</h1>
+      <p class="sub">Walkers pay a flat monthly fee. Clients book for free. Everyone wins.</p>
     </div>
+  </section>
 
-    <div class="card">
-      <h2>Owners</h2>
-      <p class="price">Free forever</p>
-      <ul>
-        <li>Find and book trusted walkers</li>
-        <li>Discover parks and routes</li>
-        <li>Join the ad‑free community</li>
-      </ul>
-      <a href="feed.html" class="btn btn-secondary">Join Community</a>
+  <!-- Pricing Plans -->
+  <section class="section">
+    <div class="container center">
+      <h2 class="h2">Choose Your Plan</h2>
+      <div class="grid-3">
+        <!-- Walker Plan -->
+        <div class="card lift">
+          <h3 class="h3">Walker Plan</h3>
+          <p class="sub">For professional dog walkers</p>
+          <p style="font-size:2rem; font-weight:800; margin: var(--space-4) 0;">£25<span style="font-size:1rem; font-weight:600;">/month</span></p>
+          <ul style="list-style:none; padding:0; margin:0 0 var(--space-4); text-align:left;">
+            <li>✔ Unlimited client bookings</li>
+            <li>✔ Instant payouts</li>
+            <li>✔ Branded dashboard</li>
+            <li>✔ Community feed access</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Start Free Trial</a>
+        </div>
+
+        <!-- Client Plan -->
+        <div class="card lift">
+          <h3 class="h3">Client Plan</h3>
+          <p class="sub">For dog owners booking walks</p>
+          <p style="font-size:2rem; font-weight:800; margin: var(--space-4) 0;">Free</p>
+          <ul style="list-style:none; padding:0; margin:0 0 var(--space-4); text-align:left;">
+            <li>✔ Browse trusted walkers</li>
+            <li>✔ Book instantly</li>
+            <li>✔ Park discovery</li>
+            <li>✔ Community feed access</li>
+          </ul>
+          <a href="feed.html" class="btn btn-secondary">Join Community</a>
+        </div>
+
+        <!-- Admin/Agency Plan (optional future) -->
+        <div class="card lift">
+          <h3 class="h3">Agency / Admin</h3>
+          <p class="sub">For teams managing multiple walkers</p>
+          <p style="font-size:2rem; font-weight:800; margin: var(--space-4) 0;">Custom</p>
+          <ul style="list-style:none; padding:0; margin:0 0 var(--space-4); text-align:left;">
+            <li>✔ Multi‑walker management</li>
+            <li>✔ Analytics dashboard</li>
+            <li>✔ Priority support</li>
+            <li>✔ White‑label branding</li>
+          </ul>
+          <a href="mailto:hello@pupsandparks.com" class="btn btn-outline">Contact Us</a>
+        </div>
+      </div>
     </div>
-  </main>
+  </section>
 
-  <footer>
-    © 2025 Pups & Parks™ — Built for trust, freedom, and community.
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🐾 Pups & Parks™</div>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="feed.html">Community</a>
+      </nav>
+    </div>
+    <p class="legal">© 2025 Pups & Parks™. All rights reserved.</p>
   </footer>
 </body>
 </html>
