@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Pixelkind</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="cursor"></div>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="apps.html">Apps</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <header class="hero small">
+    <h1>About Pixelkind</h1>
+    <p>Building cinematic, branded AI experiences that outclass the competition.</p>
+  </header>
+
+  <section class="content">
+    <p>Pixelkind is your hub for premium AI apps. From cinematic dashboards to branded AI workers, we design tools that are role‑aware, installable, and unforgettable. Every app is crafted with polish, automation, and branding at its core.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Pixelkind AI Workers™ — Built by Keiren</p>
+  </footer>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.pageX + 'px';
+      cursor.style.top = e.pageY + 'px';
+    });
+  </script>
+</body>
+</html>
