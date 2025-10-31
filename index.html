@@ -2,29 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pups & Parks™</title>
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pups & Parks™ — Trusted walks. No ads.</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 <body>
-  <nav>
-    <div class="logo">🐾 Pups & Parks™</div>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" />
+      <span>Pups & Parks™</span>
+    </a>
+    <nav aria-label="Primary" class="nav">
+      <a href="index.html" class="active">Home</a>
       <a href="pricing.html">Pricing</a>
       <a href="feed.html">Community Feed</a>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <h1>Safe paws, trusted walks — one flat fee, unlimited freedom.</h1>
-    <p>No ads. No cuts. No contracts. Just trusted walks.</p>
-    <button onclick="location.href='pricing.html'">Start Free Trial</button>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <footer>
-    <p>© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
+  <main>
+    <section class="hero">
+      <h1>Safe paws, trusted walks — one flat fee, unlimited freedom.</h1>
+      <p class="sub">No ads. No cuts. No contracts. Just trusted walks.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary" onclick="location.href='pricing.html'">Start free trial</button>
+        <button class="btn btn-secondary" onclick="location.href='feed.html'">Explore community</button>
+      </div>
+    </section>
+
+    <section class="features container">
+      <div class="feature-card">
+        <div class="icon">🐾</div>
+        <h3>Trust & safety</h3>
+        <p>Verified walkers, incident reporting, and admin oversight. Confidence baked in.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🌳</div>
+        <h3>Parks discovery</h3>
+        <p>Find safe, beautiful parks with reviews, photos, and routes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">💬</div>
+        <h3>Community feed</h3>
+        <p>Share walks, tips, and pup stories—without ads or clutter.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">💸</div>
+        <h3>Flat fee</h3>
+        <p>Walkers pay £25/month, keep 100% of earnings. Owners book for free.</p>
+      </div>
+    </section>
+
+    <section class="cta container card">
+      <h2>Ready to walk free and earn more?</h2>
+      <p>Start your 7‑day trial today. Cancel anytime.</p>
+      <button class="btn btn-primary" onclick="location.href='pricing.html'">Get started</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <img src="./assets/img/logo.svg" alt="Pups & Parks logo small" />
+        <span>Pups & Parks™</span>
+      </div>
+      <nav aria-label="Footer" class="footer-nav">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="feed.html">Community</a>
+      </nav>
+    </div>
+    <p class="legal">© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
   </footer>
+
+  <script src="./assets/js/main.js"></script>
 </body>
 </html>
