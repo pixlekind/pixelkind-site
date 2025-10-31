@@ -5,15 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>User Profile — Pups & Parks™</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <style>
+    :root {
+      --primary: #2563EB;
+      --accent: #22C55E;
+      --bg: #F8FAFC;
+      --surface: #FFFFFF;
+      --text: #0F172A;
+      --muted: #64748B;
+      --border: #E2E8F0;
+      --shadow: 0 6px 18px rgba(2, 6, 23, 0.10);
+      --radius: 14px;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+    }
+    header .logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; text-decoration: none; color: #fff; }
+    nav a { color: #fff; margin-left: 1rem; text-decoration: none; font-weight: 600; }
+    nav a.active { text-decoration: underline; }
+    .container { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .profile-header { display: flex; align-items: center; gap: 1rem; }
+    .avatar-lg {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--primary);
+    }
+    .profile-actions { margin-top: 0.5rem; display: flex; gap: 0.5rem; }
+    .btn {
+      border: none; border-radius: var(--radius);
+      padding: 0.6rem 1rem; font-weight: 700; cursor: pointer;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-secondary { background: #fff; color: var(--primary); border: 1px solid var(--primary); }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1rem; }
+    .center { text-align: center; }
+    .badge { display:inline-block; padding:0.2rem 0.6rem; border-radius:999px; font-size:0.85rem; font-weight:700; }
+    .badge-verify { background:#DCFCE7; color:#166534; border:1px solid #86EFAC; }
+    .feed-list { display: grid; gap: 1rem; }
+    .post-card { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius); padding:1rem; box-shadow: var(--shadow); }
+    footer { background:#0F172A; color:#CBD5E1; padding:1rem; text-align:center; margin-top:2rem; }
+  </style>
 </head>
 <body>
-  <header class="site-header">
+  <header>
     <a class="logo" href="index.html">
-      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" />
+      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" width="32" height="32"/>
       <span>Pups & Parks™</span>
     </a>
-    <nav class="nav">
+    <nav>
       <a href="index.html">Home</a>
       <a href="pricing.html">Pricing</a>
       <a href="feed.html">Community Feed</a>
@@ -31,14 +90,14 @@
         <h1>Jane Doe <span class="badge badge-verify">✔ Verified Walker</span></h1>
         <p class="muted">@janedoe • London, UK</p>
         <div class="profile-actions">
-          <button class="btn btn-primary">Connect</button>
+          <button class="btn btn-primary" id="connectBtn">Connect</button>
           <button class="btn btn-secondary">Message</button>
         </div>
       </div>
     </section>
 
     <!-- Bio & Stats -->
-    <section class="grid-3 mt-4">
+    <section class="grid-3">
       <div class="card">
         <h3>About</h3>
         <p>Dog lover with 5+ years of walking experience. I know all the best parks in East London!</p>
@@ -56,28 +115,41 @@
     </section>
 
     <!-- Recent Posts -->
-    <section class="mt-6">
+    <section>
       <h2>Recent Posts</h2>
       <div id="userPosts" class="feed-list"></div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner container">
-      <div class="footer-brand">
-        <img src="./assets/img/logo.svg" alt="Pups & Parks logo small" />
-        <span>Pups & Parks™</span>
-      </div>
-      <nav class="footer-nav">
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="feed.html">Community</a>
-      </nav>
-    </div>
-    <p class="legal">© 2025 Pups & Parks™</p>
+  <footer>
+    <p>© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
   </footer>
 
-  <script src="./assets/js/main.js"></script>
+  <script>
+    // Demo: load user posts into profile
+    (function initProfile() {
+      const postsDiv = document.getElementById('userPosts');
+      if (!postsDiv) return;
+      const all = JSON.parse(localStorage.getItem('pp_posts') || '[]');
+      const mine = all.filter(p => p.author === 'You');
+      mine.slice().reverse().forEach(p => {
+        const el = document.createElement('article');
+        el.className = 'post-card';
+        el.innerHTML = \`
+          <p>\${p.text}</p>
+          <div class="post-meta">\${new Date(p.ts).toLocaleString()}</div>
+        \`;
+        postsDiv.appendChild(el);
+      });
+    })();
+
+    // Demo: connect button increments followers
+    document.getElementById('connectBtn')?.addEventListener('click', () => {
+      const countEl = document.getElementById('followersCount');
+      let count = parseInt(countEl.textContent, 10);
+      countEl.textContent = count + 1;
+      alert('🎉 You are now connected!');
+    });
+  </script>
 </body>
 </html>
