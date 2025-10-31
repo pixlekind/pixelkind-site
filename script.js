@@ -19,8 +19,11 @@ function resize() {
 resize();
 window.addEventListener('resize', resize);
 
-function setMouse(e) {
-  const x = e.clientX ?? (e.touches && e.touches[0].clientX);
-  const y = e.clientY ?? (e.touches && e.touches[0].clientY);
-  if (x == null || y == null) return;
-  mouseX =
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+// Particle factory
+function createParticle(x, y) {
+  particles.push({
