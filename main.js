@@ -1,9 +1,20 @@
-// Simple interactivity for Pixelkind Hub
+// Simple demo interactivity for feed
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("hubBtn");
-  const msg = document.getElementById("message");
+  const form = document.getElementById("postForm");
+  const postsDiv = document.getElementById("posts");
 
-  btn.addEventListener("click", () => {
-    msg.textContent = "🚀 Pixelkind Hub is live and interactive!";
-  });
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const content = document.getElementById("postContent").value.trim();
+      if (!content) return;
+
+      const postEl = document.createElement("div");
+      postEl.className = "post";
+      postEl.textContent = content;
+      postsDiv.prepend(postEl);
+
+      document.getElementById("postContent").value = "";
+    });
+  }
 });
