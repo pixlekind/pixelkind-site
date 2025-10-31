@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Profile — Pups & Parks™</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" />
+      <span>Pups & Parks™</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="feed.html">Community Feed</a>
+      <a href="profile.html" class="active">Profile</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Profile Header -->
+    <section class="card profile-header">
+      <img src="./assets/img/default-avatar.png" alt="User avatar" class="avatar-lg" />
+      <div>
+        <h1>Jane Doe <span class="badge badge-verify">✔ Verified Walker</span></h1>
+        <p class="muted">@janedoe • London, UK</p>
+        <button class="btn btn-primary">Connect</button>
+      </div>
+    </section>
+
+    <!-- Bio & Stats -->
+    <section class="grid-3 mt-4">
+      <div class="card">
+        <h3>About</h3>
+        <p>Dog lover with 5+ years of walking experience. I know all the best parks in East London!</p>
+      </div>
+      <div class="card center">
+        <h3>Connections</h3>
+        <p><strong>128</strong> Followers</p>
+        <p><strong>94</strong> Following</p>
+      </div>
+      <div class="card center">
+        <h3>Activity</h3>
+        <p><strong>56</strong> Walks</p>
+        <p><strong>12</strong> Reviews</p>
+      </div>
+    </section>
+
+    <!-- Recent Posts -->
+    <section class="mt-6">
+      <h2>Recent Posts</h2>
+      <div id="userPosts" class="feed-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <img src="./assets/img/logo.svg" alt="Pups & Parks logo small" />
+        <span>Pups & Parks™</span>
+      </div>
+      <nav class="footer-nav">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="feed.html">Community</a>
+      </nav>
+    </div>
+    <p class="legal">© 2025 Pups & Parks™</p>
+  </footer>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
