@@ -4,72 +4,79 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pups & Parks™ Community Feed</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    body { margin:0; font-family:'Inter', sans-serif; background:#F1F5F9; color:#0F172A; }
-    header { background:#2563EB; color:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:10; }
-    header a { color:#fff; text-decoration:none; font-weight:600; margin-left:1.5rem; }
-    .container { max-width:800px; margin:2rem auto; padding:0 1rem; }
-    .composer { background:#fff; border-radius:14px; padding:1rem; box-shadow:0 6px 18px rgba(0,0,0,0.08); margin-bottom:2rem; }
-    .composer textarea { width:100%; border:none; resize:none; font-size:1rem; padding:.5rem; border-radius:10px; background:#F8FAFC; }
-    .composer button { margin-top:.8rem; background:#2563EB; color:#fff; border:none; padding:.6rem 1.2rem; border-radius:10px; font-weight:700; cursor:pointer; }
-    .feed { display:flex; flex-direction:column; gap:1.5rem; }
-    .post { background:#fff; border-radius:14px; padding:1rem; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
-    .post-header { display:flex; align-items:center; gap:.8rem; margin-bottom:.8rem; }
-    .avatar { width:45px; height:45px; border-radius:50%; background:#CBD5E1; }
-    .username { font-weight:700; }
-    .timestamp { font-size:.85rem; color:#64748B; }
-    .actions { display:flex; justify-content:space-around; margin-top:.8rem; font-size:.9rem; color:#475569; border-top:1px solid #E2E8F0; padding-top:.5rem; }
-    .actions button { background:none; border:none; cursor:pointer; font-weight:600; color:#2563EB; }
-  </style>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <div style="font-weight:800;">Pups & Parks™</div>
-    <nav>
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="logo">🐾 Pups & Parks™</a>
+    <nav class="nav">
       <a href="index.html">Home</a>
       <a href="pricing.html">Pricing</a>
-      <a href="feed.html" style="text-decoration:underline">Community</a>
+      <a href="feed.html" class="active">Community</a>
       <a href="profile.html">Profile</a>
     </nav>
   </header>
 
-  <main class="container">
+  <!-- Hero Banner -->
+  <section class="hero hero-image">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="h1">Your Community Feed</h1>
+      <p class="sub">Share walks, discover parks, and connect with other dog lovers.</p>
+    </div>
+  </section>
+
+  <!-- Feed Container -->
+  <main class="container section-tight">
     <!-- Composer -->
-    <div class="composer">
-      <textarea id="composerText" rows="3" placeholder="Share your walk, park discovery, or pup moment..."></textarea>
-      <button id="postBtn">Post</button>
+    <div class="card composer">
+      <label for="composerText">Create a post</label>
+      <textarea id="composerText" placeholder="Share your walk, park discovery, or pup moment..."></textarea>
+      <div class="composer-actions">
+        <button id="postBtn" class="btn btn-primary">Post</button>
+      </div>
     </div>
 
-    <!-- Feed -->
-    <div id="feed" class="feed"></div>
+    <!-- Feed List -->
+    <div id="feed" class="feed-list"></div>
   </main>
 
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">🐾 Pups & Parks™</div>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="feed.html">Community</a>
+      </nav>
+    </div>
+    <p class="legal">© 2025 Pups & Parks™. All rights reserved.</p>
+  </footer>
+
+  <!-- LocalStorage Feed Logic -->
   <script>
     const feed = document.getElementById("feed");
     const textarea = document.getElementById("composerText");
     const postBtn = document.getElementById("postBtn");
 
-    // Load posts from localStorage
     let posts = JSON.parse(localStorage.getItem("posts")) || [];
 
     function renderFeed() {
       feed.innerHTML = "";
       posts.forEach(post => {
         feed.innerHTML += `
-          <div class="post">
-            <div class="post-header">
-              <div class="avatar"></div>
-              <div>
-                <div class="username">${post.username}</div>
-                <div class="timestamp">${post.timestamp}</div>
-              </div>
+          <div class="post-card reveal">
+            <div class="post-meta">
+              <span><strong>${post.username}</strong></span>
+              <span>${post.timestamp}</span>
             </div>
-            <div class="content">${post.content}</div>
-            <div class="actions">
-              <button>👍 Like</button>
-              <button>💬 Comment</button>
-              <button>↗ Share</button>
+            <p>${post.content}</p>
+            <div class="post-actions">
+              <span class="pill">👍 Like</span>
+              <span class="pill">💬 Comment</span>
+              <span class="pill">↗ Share</span>
             </div>
           </div>
         `;
@@ -79,11 +86,11 @@
     postBtn.addEventListener("click", () => {
       if (textarea.value.trim() === "") return;
       const newPost = {
-        username: "Demo User", // Replace with logged-in user later
+        username: "Demo User",
         content: textarea.value,
         timestamp: new Date().toLocaleString()
       };
-      posts.unshift(newPost); // newest first
+      posts.unshift(newPost);
       localStorage.setItem("posts", JSON.stringify(posts));
       textarea.value = "";
       renderFeed();
