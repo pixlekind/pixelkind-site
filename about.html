@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>About Pixelkind</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — Pups & Parks™</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 <body>
-  <div class="cursor"></div>
-
-  <nav class="navbar">
-    <a href="index.html">Home</a>
-    <a href="apps.html">Apps</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-
-  <header class="hero small">
-    <h1>About Pixelkind</h1>
-    <p>Building cinematic, branded digital experiences that outclass the competition.</p>
+  <header class="site-header">
+    <a class="logo" href="index.html">
+      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" />
+      <span>Pups & Parks™</span>
+    </a>
+    <nav aria-label="Primary" class="nav">
+      <a href="index.html">Home</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="feed.html">Community Feed</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <section class="content">
-    <p>Pixelkind is your hub for premium apps and experiments. From cinematic dashboards to branded AI workers, we design tools that are role‑aware, installable, and unforgettable. Every project is crafted with polish, automation, and branding at its core.</p>
-  </section>
+  <main class="container">
+    <section class="card">
+      <h1>Community‑first dog walking</h1>
+      <p>Pups & Parks™ was built to make dog walking simple, safe, and fair. Owners get an ad‑free place to discover parks and book trusted walkers. Walkers pay a simple flat fee and keep 100% of their earnings.</p>
+      <h2>What we believe</h2>
+      <ul class="bullets">
+        <li>Trust and transparency over gimmicks</li>
+        <li>Community and care over clicks and ads</li>
+        <li>Simple, fair pricing that scales with your success</li>
+      </ul>
+    </section>
+  </main>
 
-  <footer>
-    <p>© 2025 Pixelkind — Built by Keiren</p>
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">
+        <img src="./assets/img/logo.svg" alt="Pups & Parks logo small" />
+        <span>Pups & Parks™</span>
+      </div>
+      <nav aria-label="Footer" class="footer-nav">
+        <a href="about.html" class="active">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="feed.html">Community</a>
+      </nav>
+    </div>
+    <p class="legal">© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="./assets/js/main.js"></script>
 </body>
 </html>
