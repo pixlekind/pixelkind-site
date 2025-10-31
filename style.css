@@ -22,34 +22,4 @@ h1, h2 { margin: 0; }
 .navbar a {
   color: #fff;
   text-decoration: none;
-  font-weight: bold;
-}
-.navbar a:hover { color: #00fff7; }
-
-/* Hero */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle at center, #00fff7 0%, #0a0a0a 100%);
-  text-align: center;
-  padding: 2rem;
-}
-.hero.small { min-height: 40vh; }
-.hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-.hero p { font-size: 1.2rem; opacity: 0.8; max-width: 600px; }
-
-/* Buttons */
-.btn {
-  display: inline-block;
-  margin: 0.5rem;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: transform 0.2s, background 0.3s;
-}
-.btn:hover { transform: scale(1.05); }
-.btn
+  font-weight:
