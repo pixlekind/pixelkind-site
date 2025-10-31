@@ -4,110 +4,64 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pricing — Pups & Parks™</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; margin:0; background:#F8FAFC; color:#0F172A; }
+    header { background:#2563EB; color:#fff; padding:1rem; display:flex; justify-content:space-between; align-items:center; }
+    header a { color:#fff; text-decoration:none; font-weight:700; margin-left:1rem; }
+    .container { max-width:960px; margin:2rem auto; padding:0 1rem; }
+    h1 { font-size:2rem; font-weight:800; margin-bottom:1rem; }
+    .card { background:#fff; border:1px solid #E2E8F0; border-radius:14px; padding:1.5rem; box-shadow:0 6px 18px rgba(2,6,23,0.1); margin-bottom:1.5rem; }
+    .price { font-size:1.8rem; font-weight:800; color:#2563EB; }
+    .btn { display:inline-block; padding:.8rem 1.2rem; border-radius:12px; font-weight:800; text-decoration:none; }
+    .btn-primary { background:#22C55E; color:#fff; }
+    .btn-primary:hover { background:#16A34A; }
+    .btn-secondary { background:#fff; border:2px solid #2563EB; color:#2563EB; }
+    footer { background:#0F172A; color:#CBD5E1; text-align:center; padding:1rem; margin-top:2rem; }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <a class="logo" href="index.html">
-      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" />
-      <span>Pups & Parks™</span>
-    </a>
-    <nav aria-label="Primary" class="nav">
+  <header>
+    <div><strong>Pups & Parks™</strong></div>
+    <nav>
       <a href="index.html">Home</a>
-      <a href="pricing.html" class="active">Pricing</a>
-      <a href="feed.html">Community Feed</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="pricing.html" style="text-decoration:underline">Pricing</a>
+      <a href="feed.html">Community</a>
+      <a href="profile.html">Profile</a>
     </nav>
   </header>
 
   <main class="container">
-    <section id="trialBanner" class="banner banner-info" hidden>
-      <div class="banner-content">
-        <strong>Free trial active:</strong>
-        <span id="trialCountdown">7 days left</span>
-      </div>
-      <div class="banner-actions">
-        <button class="btn btn-outline" onclick="location.href='#plans'">Upgrade now</button>
-      </div>
-    </section>
+    <h1>Simple, transparent pricing</h1>
+    <p>No ads, no hidden fees, no commissions. Owners book free. Walkers pay one flat monthly fee.</p>
 
-    <section class="pricing-intro">
-      <h1>Simple, transparent pricing</h1>
-      <p>No ads, no hidden fees, no commissions. Owners book free. Walkers pay one flat monthly fee.</p>
-    </section>
+    <div class="card">
+      <h2>Walkers</h2>
+      <p class="price">£25/month</p>
+      <ul>
+        <li>Keep 100% of your earnings</li>
+        <li>7‑day free trial</li>
+        <li>Trust dashboard & booking tools</li>
+        <li>Access to community feed</li>
+      </ul>
+      <!-- 👇 Replace the URL below with your real Stripe Checkout link -->
+      <a href="https://buy.stripe.com/test_12345ABCDE" class="btn btn-primary">Start Free Trial</a>
+    </div>
 
-    <section id="plans" class="card-grid">
-      <article class="card plan">
-        <header>
-          <h2>Walkers</h2>
-          <p class="price">£25/month</p>
-        </header>
-        <ul class="features-list">
-          <li>Keep 100% of your earnings</li>
-          <li>7‑day free trial (no contract)</li>
-          <li>Trust dashboard & booking tools</li>
-          <li>Access to community feed</li>
-        </ul>
-        <button class="btn btn-primary" id="startTrialBtn">Start free trial</button>
-        <p class="hint">Cancel anytime. No contract.</p>
-      </article>
-
-      <article class="card plan">
-        <header>
-          <h2>Owners</h2>
-          <p class="price">Free forever</p>
-        </header>
-        <ul class="features-list">
-          <li>Find and book trusted walkers</li>
-          <li>Discover parks and routes</li>
-          <li>Join the ad‑free community</li>
-        </ul>
-        <button class="btn btn-secondary" onclick="location.href='feed.html'">Join community</button>
-        <p class="hint">No fees, no upsells, no ads.</p>
-      </article>
-    </section>
-
-    <section class="card compare">
-      <h3>Why £25/month beats commissions</h3>
-      <div class="compare-grid">
-        <div>
-          <h4>Commission model (typical)</h4>
-          <ul>
-            <li>15–40% taken from every booking</li>
-            <li>Unpredictable monthly costs</li>
-            <li>Ads and cross‑selling clutter</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Pups & Parks™ flat fee</h4>
-          <ul>
-            <li>£25/month, keep 100% of your earnings</li>
-            <li>Predictable cost, scales with you</li>
-            <li>Ad‑free, clean, professional tools</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <div class="card">
+      <h2>Owners</h2>
+      <p class="price">Free forever</p>
+      <ul>
+        <li>Find and book trusted walkers</li>
+        <li>Discover parks and routes</li>
+        <li>Join the ad‑free community</li>
+      </ul>
+      <a href="feed.html" class="btn btn-secondary">Join Community</a>
+    </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner container">
-      <div class="footer-brand">
-        <img src="./assets/img/logo.svg" alt="Pups & Parks logo small" />
-        <span>Pups & Parks™</span>
-      </div>
-      <nav aria-label="Footer" class="footer-nav">
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="feed.html">Community</a>
-      </nav>
-    </div>
-    <p class="legal">© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
+  <footer>
+    © 2025 Pups & Parks™ — Built for trust, freedom, and community.
   </footer>
-
-  <script src="./assets/js/main.js"></script>
 </body>
 </html>
