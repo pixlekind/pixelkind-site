@@ -1,155 +1,132 @@
+<!-- profile.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>User Profile — Pups & Parks™</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #2563EB;
-      --accent: #22C55E;
-      --bg: #F8FAFC;
-      --surface: #FFFFFF;
-      --text: #0F172A;
-      --muted: #64748B;
-      --border: #E2E8F0;
-      --shadow: 0 6px 18px rgba(2, 6, 23, 0.10);
-      --radius: 14px;
-    }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    header {
-      background: var(--primary);
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-    }
-    header .logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; text-decoration: none; color: #fff; }
-    nav a { color: #fff; margin-left: 1rem; text-decoration: none; font-weight: 600; }
-    nav a.active { text-decoration: underline; }
-    .container { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .profile-header { display: flex; align-items: center; gap: 1rem; }
-    .avatar-lg {
-      width: 100px; height: 100px;
-      border-radius: 50%;
-      border: 3px solid var(--primary);
-    }
-    .profile-actions { margin-top: 0.5rem; display: flex; gap: 0.5rem; }
-    .btn {
-      border: none; border-radius: var(--radius);
-      padding: 0.6rem 1rem; font-weight: 700; cursor: pointer;
-    }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-secondary { background: #fff; color: var(--primary); border: 1px solid var(--primary); }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1rem; }
-    .center { text-align: center; }
-    .badge { display:inline-block; padding:0.2rem 0.6rem; border-radius:999px; font-size:0.85rem; font-weight:700; }
-    .badge-verify { background:#DCFCE7; color:#166534; border:1px solid #86EFAC; }
-    .feed-list { display: grid; gap: 1rem; }
-    .post-card { background: var(--surface); border:1px solid var(--border); border-radius: var(--radius); padding:1rem; box-shadow: var(--shadow); }
-    footer { background:#0F172A; color:#CBD5E1; padding:1rem; text-align:center; margin-top:2rem; }
-  </style>
+  <title>Pups & Parks™ — Profile</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <a class="logo" href="index.html">
-      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" width="32" height="32"/>
+  <header class="site-header">
+    <a href="index.html" class="logo">
+      <span class="brand-mark">🐾</span>
       <span>Pups & Parks™</span>
     </a>
-    <nav>
+    <nav class="nav" aria-label="Main">
       <a href="index.html">Home</a>
       <a href="pricing.html">Pricing</a>
-      <a href="feed.html">Community Feed</a>
+      <a href="feed.html">Community</a>
       <a href="profile.html" class="active">Profile</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <main class="container">
-    <!-- Profile Header -->
-    <section class="card profile-header">
-      <img src="./assets/img/default-avatar.png" alt="User avatar" class="avatar-lg" />
-      <div>
-        <h1>Jane Doe <span class="badge badge-verify">✔ Verified Walker</span></h1>
-        <p class="muted">@janedoe • London, UK</p>
-        <div class="profile-actions">
-          <button class="btn btn-primary" id="connectBtn">Connect</button>
-          <button class="btn btn-secondary">Message</button>
+  <main class="section">
+    <div class="container grid-2">
+      <!-- Profile card -->
+      <div class="card">
+        <h1 class="h2">Your profile</h1>
+        <div class="grid-2 mt-4">
+          <div>
+            <label for="displayName">Display name</label>
+            <input id="displayName" type="text" placeholder="e.g. Keiren N.">
+            <label for="role" class="mt-3">Role</label>
+            <select id="role">
+              <option>Owner</option>
+              <option>Walker</option>
+              <option>Agency</option>
+            </select>
+          </div>
+          <div>
+            <label for="bio">Bio</label>
+            <textarea id="bio" placeholder="Tell the community about your pup or your walks..."></textarea>
+            <label for="avatarUrl" class="mt-3">Avatar URL</label>
+            <input id="avatarUrl" type="url" placeholder="https://... (optional)">
+          </div>
+        </div>
+        <div class="mt-4">
+          <button id="saveProfile" class="btn btn-primary btn-pill">Save profile</button>
+          <button id="clearProfile" class="btn btn-outline btn-pill" style="margin-left:var(--space-3)">Reset</button>
         </div>
       </div>
-    </section>
 
-    <!-- Bio & Stats -->
-    <section class="grid-3">
+      <!-- Dashboard card -->
       <div class="card">
-        <h3>About</h3>
-        <p>Dog lover with 5+ years of walking experience. I know all the best parks in East London!</p>
-      </div>
-      <div class="card center">
-        <h3>Connections</h3>
-        <p><strong id="followersCount">128</strong> Followers</p>
-        <p><strong id="followingCount">94</strong> Following</p>
-      </div>
-      <div class="card center">
-        <h3>Activity</h3>
-        <p><strong>56</strong> Walks</p>
-        <p><strong>12</strong> Reviews</p>
-      </div>
-    </section>
+        <h2 class="h3">Dashboard</h2>
+        <p class="muted">Demo stats (local only)</p>
+        <div class="grid-3 mt-4">
+          <div class="card-tight" style="background:#0E1626; border-radius: var(--radius-md);">
+            <strong>Completed walks</strong>
+            <div style="font-size:1.8rem; font-weight:800; margin-top:var(--space-2)">42</div>
+          </div>
+          <div class="card-tight" style="background:#0E1626; border-radius: var(--radius-md);">
+            <strong>Avg. rating</strong>
+            <div style="font-size:1.8rem; font-weight:800; margin-top:var(--space-2)">4.9★</div>
+          </div>
+          <div class="card-tight" style="background:#0E1626; border-radius: var(--radius-md);">
+            <strong>Bookings this week</strong>
+            <div style="font-size:1.8rem; font-weight:800; margin-top:var(--space-2)">7</div>
+          </div>
+        </div>
 
-    <!-- Recent Posts -->
-    <section>
-      <h2>Recent Posts</h2>
-      <div id="userPosts" class="feed-list"></div>
-    </section>
+        <div class="mt-6">
+          <h3 class="h3">Recent activity</h3>
+          <ul style="list-style:none; padding:0; margin:0; line-height:1.9">
+            <li>• Walk booked: Saturday 10:00 — Southchurch Park</li>
+            <li>• New review from Emily: “Amazing trust & care!”</li>
+            <li>• Tip: Try Chalkwell Beach path for cooler evenings</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <footer>
-    <p>© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-brand">🐾 Pups & Parks™</div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="feed.html">Community</a>
+        <a href="profile.html">Profile</a>
+      </nav>
+    </div>
+    <p class="legal">© 2025 Pups & Parks™. All rights reserved.</p>
   </footer>
 
   <script>
-    // Demo: load user posts into profile
-    (function initProfile() {
-      const postsDiv = document.getElementById('userPosts');
-      if (!postsDiv) return;
-      const all = JSON.parse(localStorage.getItem('pp_posts') || '[]');
-      const mine = all.filter(p => p.author === 'You');
-      mine.slice().reverse().forEach(p => {
-        const el = document.createElement('article');
-        el.className = 'post-card';
-        el.innerHTML = \`
-          <p>\${p.text}</p>
-          <div class="post-meta">\${new Date(p.ts).toLocaleString()}</div>
-        \`;
-        postsDiv.appendChild(el);
-      });
-    })();
+    const displayName = document.getElementById('displayName');
+    const role = document.getElementById('role');
+    const bio = document.getElementById('bio');
+    const avatarUrl = document.getElementById('avatarUrl');
+    const saveProfile = document.getElementById('saveProfile');
+    const clearProfile = document.getElementById('clearProfile');
 
-    // Demo: connect button increments followers
-    document.getElementById('connectBtn')?.addEventListener('click', () => {
-      const countEl = document.getElementById('followersCount');
-      let count = parseInt(countEl.textContent, 10);
-      countEl.textContent = count + 1;
-      alert('🎉 You are now connected!');
+    function loadProfile() {
+      const data = JSON.parse(localStorage.getItem('pp_profile')) || {};
+      displayName.value = data.displayName || '';
+      role.value = data.role || 'Owner';
+      bio.value = data.bio || '';
+      avatarUrl.value = data.avatarUrl || '';
+    }
+
+    saveProfile.addEventListener('click', () => {
+      const data = {
+        displayName: displayName.value.trim(),
+        role: role.value,
+        bio: bio.value.trim(),
+        avatarUrl: avatarUrl.value.trim()
+      };
+      localStorage.setItem('pp_profile', JSON.stringify(data));
+      alert('Profile saved (local)');
     });
+
+    clearProfile.addEventListener('click', () => {
+      localStorage.removeItem('pp_profile');
+      loadProfile();
+    });
+
+    loadProfile();
   </script>
 </body>
 </html>
