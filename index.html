@@ -10,34 +10,26 @@
 <body>
   <div class="cursor"></div>
 
-  <!-- Hero -->
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="apps.html">Apps</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
   <header class="hero">
     <h1>Pixelkind AI Workers™</h1>
-    <p>Cinematic branded AI workforce — installable, role‑aware, unforgettable.</p>
+    <p>The cinematic hub for branded AI apps — installable, role‑aware, unforgettable.</p>
     <div class="cta">
-      <a href="https://studio-3250182888-915fd.web.app" class="btn">🚀 Launch App</a>
-      <a href="#orbs" class="btn secondary">✨ Meet the Workers</a>
+      <a href="apps.html" class="btn">✨ Explore Apps</a>
     </div>
   </header>
 
-  <!-- Orb Grid -->
-  <section id="orbs" class="orb-grid">
-    <div class="orb cyan"><span>Nova</span><small>Strategist</small></div>
-    <div class="orb blue"><span>Kai</span><small>Intuitive</small></div>
-    <div class="orb orange"><span>Echo</span><small>Analyst</small></div>
-    <div class="orb ring"><span>Muse</span><small>Creative</small></div>
-    <div class="orb glass"><span>Lumen</span><small>Analyst</small></div>
-    <div class="orb molten"><span>Forge</span><small>Executor</small></div>
-    <div class="orb magenta"><span>Clause</span><small>Legal</small></div>
-  </section>
-
-  <!-- Footer -->
   <footer>
     <p>© 2025 Pixelkind AI Workers™ — Built by Keiren</p>
   </footer>
 
   <script>
-    // Magic cursor
     const cursor = document.querySelector('.cursor');
     document.addEventListener('mousemove', e => {
       cursor.style.left = e.pageX + 'px';
