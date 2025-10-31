@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +8,12 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- Header -->
   <header class="site-header">
-    <a href="index.html" class="logo">🐾 Pups & Parks™</a>
-    <nav class="nav">
+    <a href="index.html" class="logo">
+      <span class="brand-mark">🐾</span>
+      <span>Pups & Parks™</span>
+    </a>
+    <nav class="nav" aria-label="Main">
       <a href="index.html" class="active">Home</a>
       <a href="pricing.html">Pricing</a>
       <a href="feed.html">Community</a>
@@ -18,51 +21,58 @@
     </nav>
   </header>
 
-  <!-- Hero (Split Layout) -->
-  <section class="hero section" style="display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:var(--space-6);">
-    <div class="hero-content" style="text-align:left;">
-      <h1 class="h1">Walks You Can Trust</h1>
-      <p class="sub">Discover vetted walkers, explore local parks, and join a community built for pups and their people.</p>
-      <div style="margin-top: var(--space-4);">
-        <a href="pricing.html" class="btn btn-primary">Start Free Trial</a>
-        <a href="feed.html" class="btn btn-secondary">Join Community</a>
+  <!-- Split Hero -->
+  <section class="section">
+    <div class="container hero">
+      <div>
+        <h1 class="h1">Walks you can trust. Parks you’ll love.</h1>
+        <p class="sub">Find vetted walkers, explore local parks, and join a community built for pups and their people.</p>
+        <div class="mt-4">
+          <a href="pricing.html" class="btn btn-primary btn-pill">Start free trial</a>
+          <a href="feed.html" class="btn btn-secondary btn-pill" style="margin-left:var(--space-3)">Join community</a>
+        </div>
+        <div class="banner banner-info mt-4">
+          <div><strong>Instant payouts</strong> for walkers • <strong>Free booking</strong> for owners</div>
+          <a class="btn btn-outline btn-pill" href="pricing.html">View pricing</a>
+        </div>
       </div>
-    </div>
-    <div>
-      <img src="https://static.vecteezy.com/system/resources/previews/053/725/081/large_2x/dog-walking-in-park-pet-run-along-path-nature-cute-animal-face-photo.jpg" 
-           alt="Dog walking in park" 
-           style="width:100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); object-fit:cover;">
+      <div class="hero-media">
+        <img src="https://static.vecteezy.com/system/resources/previews/053/725/081/large_2x/dog-walking-in-park-pet-run-along-path-nature-cute-animal-face-photo.jpg" alt="Dog walking in a scenic park path">
+        <span class="hero-badge">Trusted by 5,000+ owners</span>
+      </div>
     </div>
   </section>
 
-  <!-- Trust Logos -->
-  <section class="section-tight center">
-    <p class="sub">Trusted by dog owners and walkers across the UK</p>
-    <div class="grid-3" style="margin-top:var(--space-4); opacity:0.8;">
-      <div>🐶 Kennel Club</div>
-      <div>🌍 Local Parks Assoc.</div>
-      <div>⭐ 5,000+ Happy Walkers</div>
+  <!-- Trust row -->
+  <section class="section-tight">
+    <div class="container center">
+      <p class="sub">Trusted by dog owners and walkers across the UK</p>
+      <div class="grid-3 mt-4" style="opacity:0.85">
+        <div>🐶 Kennel Club</div>
+        <div>🌍 Local Parks Assoc.</div>
+        <div>⭐ 5,000+ Happy Walkers</div>
+      </div>
     </div>
   </section>
 
   <!-- Features -->
   <section class="section">
-    <div class="container center">
+    <div class="container">
       <h2 class="h2">Why Pups & Parks™?</h2>
-      <div class="feature-grid">
+      <div class="feature-grid mt-4">
         <div class="feature-card lift">
           <div class="icon">🐾</div>
-          <h3 class="h3">Trusted Walkers</h3>
+          <h3 class="h3">Trusted walkers</h3>
           <p>Every walker is vetted and reviewed for safety and reliability.</p>
         </div>
         <div class="feature-card lift">
           <div class="icon">🌳</div>
-          <h3 class="h3">Park Discovery</h3>
+          <h3 class="h3">Park discovery</h3>
           <p>Explore the best local parks and routes, curated by the community.</p>
         </div>
         <div class="feature-card lift">
           <div class="icon">🤝</div>
-          <h3 class="h3">Community Feed</h3>
+          <h3 class="h3">Community feed</h3>
           <p>Share walks, photos, and tips in a vibrant, ad‑free social feed.</p>
         </div>
       </div>
@@ -70,41 +80,42 @@
   </section>
 
   <!-- Testimonials -->
-  <section class="section banner banner-info">
+  <section class="section">
+    <div class="container grid-2">
+      <div class="card reveal">
+        <h3 class="h3">“Zero friction. All joy.”</h3>
+        <p>“Pups & Parks™ made it easy to book trusted walkers. My dog is happier, I’m less stressed.”</p>
+        <p class="muted">— Emily, Dog Owner</p>
+      </div>
+      <div class="card reveal-delay">
+        <h3 class="h3">“Instant bookings & payouts.”</h3>
+        <p>“As a walker, I get consistent clients and instant payouts. The dashboard is a game‑changer.”</p>
+        <p class="muted">— James, Walker</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-tight">
     <div class="container center">
-      <h2 class="h2">Loved by Walkers & Owners</h2>
-      <div class="grid-2" style="margin-top:var(--space-4); text-align:left;">
-        <div class="card">
-          <p>“Pups & Parks™ made it so easy to find trusted walkers. My dog loves every walk!”</p>
-          <p class="muted">— Emily, Dog Owner</p>
-        </div>
-        <div class="card">
-          <p>“As a walker, I get instant bookings and payouts. The dashboard is a game‑changer.”</p>
-          <p class="muted">— James, Walker</p>
+      <div class="card lift">
+        <h2 class="h2">Ready to join the pack?</h2>
+        <p class="sub">Start your free trial today and unlock trusted walks, park discovery, and community.</p>
+        <div class="mt-4">
+          <a href="pricing.html" class="btn btn-primary btn-pill">Start free trial</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section class="section-tight center">
-    <div class="card lift glow">
-      <h2 class="h2">Ready to Join the Pack?</h2>
-      <p class="sub">Start your free trial today and unlock trusted walks, park discovery, and community.</p>
-      <div style="margin-top: var(--space-4);">
-        <a href="pricing.html" class="btn btn-primary btn-pill">Start Free Trial</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-inner">
+    <div class="footer-inner container">
       <div class="footer-brand">🐾 Pups & Parks™</div>
-      <nav class="footer-nav">
+      <nav class="footer-nav" aria-label="Footer">
         <a href="index.html">Home</a>
         <a href="pricing.html">Pricing</a>
         <a href="feed.html">Community</a>
+        <a href="profile.html">Profile</a>
       </nav>
     </div>
     <p class="legal">© 2025 Pups & Parks™. All rights reserved.</p>
