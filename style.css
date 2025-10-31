@@ -87,7 +87,7 @@ footer { text-align: center; padding: 2rem; background: #111; font-size: 0.9rem;
   background: #00fff7;
   box-shadow: 0 0 20px rgba(0,255,247,0.8), 0 0 40px rgba(0,255,247,0.4);
   pointer-events: none;
-  z-index: 2001;
+  z-index: 9999; /* always above everything */
   transform: translate(-50%, -50%);
 }
 
@@ -95,6 +95,6 @@ footer { text-align: center; padding: 2rem; background: #111; font-size: 0.9rem;
 #cursor-trail {
   position: fixed;
   inset: 0;
-  z-index: 2000;
+  z-index: 5000; /* below .cursor */
   pointer-events: none;
 }
