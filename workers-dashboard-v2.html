@@ -1,99 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Walker Dashboard — Pups & Parks™</title>
+  <title>Walker Dashboard (v2) — Pups & Parks™</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --primary:#2563EB; --primary-dark:#1E40AF; --accent:#22C55E; --accent-dark:#16A34A;
-      --bg:#F8FAFC; --surface:#FFFFFF; --text:#0F172A; --muted:#64748B; --border:#E2E8F0;
-      --shadow-sm:0 6px 18px rgba(2,6,23,.10); --shadow-md:0 12px 30px rgba(2,6,23,.12);
-      --radius:14px; --container:1180px; --space:1rem;
+      --primary:#2563EB; --primary-900:#1E3A8A; --accent:#22C55E; --accent-700:#15803D;
+      --bg:#0B1220; --bg-soft:#0F172A; --surface:#111827; --surface-2:#1F2937;
+      --text:#F8FAFC; --muted:#94A3B8; --border:#233047;
+      --glass: rgba(255,255,255,0.06);
+      --shadow: 0 12px 32px rgba(2,6,23,0.35);
+      --radius: 16px; --radius-sm: 12px; --container: 1200px;
     }
+    /* Light theme tokens */
+    [data-theme="light"]{
+      --bg:#F8FAFC; --bg-soft:#EEF2FF; --surface:#FFFFFF; --surface-2:#F1F5F9;
+      --text:#0F172A; --muted:#64748B; --border:#E2E8F0; --glass: rgba(2,6,23,0.05);
+      --shadow: 0 12px 28px rgba(2,6,23,0.12);
+    }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.65}
-    header{background:var(--primary);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:.9rem 1rem;position:sticky;top:0;z-index:20;box-shadow:0 4px 16px rgba(0,0,0,.12)}
-    .logo{display:flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;font-weight:800}
-    .logo img{width:32px;height:32px}
-    nav a{color:#fff;text-decoration:none;margin-left:.75rem;font-weight:700;opacity:.95;padding:.3rem .6rem;border-radius:10px}
-    nav a:hover{opacity:1;background:rgba(255,255,255,.14)}
-    .container{max-width:var(--container);margin:0 auto;padding:1.2rem}
-    .grid{display:grid;grid-template-columns:280px 1fr;gap:1rem}
-    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:1rem}
-    .sidebar .section-title{font-weight:800;margin:.25rem 0 .5rem}
-    .menu{display:grid;gap:.5rem}
-    .menu button{border:1px solid var(--border);background:#fff;border-radius:12px;padding:.6rem .8rem;text-align:left;cursor:pointer;font-weight:700}
-    .menu button.active{border-color:#BFDBFE;background:#EFF6FF;color:#0C4A6E}
-    .content{display:grid;gap:1rem}
-    .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
-    .btn{border:none;border-radius:12px;padding:.7rem 1rem;font-weight:800;cursor:pointer}
-    .btn-primary{background:var(--accent);color:#fff} .btn-primary:hover{background:var(--accent-dark)}
-    .btn-secondary{background:#fff;color:var(--primary);border:2px solid var(--primary)} .btn-secondary:hover{background:#F3F4F6}
-    .btn-ghost{background:transparent;border:1px dashed var(--border);color:var(--muted)}
-    label{font-weight:700;display:block;margin:.4rem 0 .2rem}
-    input,select,textarea{width:100%;border:1px solid var(--border);border-radius:12px;padding:.6rem;background:#fff;font-size:1rem}
-    textarea{min-height:100px;resize:vertical}
-    .avatar{width:72px;height:72px;border-radius:50%;border:3px solid var(--primary)}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg); color:var(--text); line-height:1.65;
+    }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:30; backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(37,99,235,0.12), transparent);
+      border-bottom: 1px solid var(--border);
+    }
+    .hdr-inner{max-width:var(--container); margin:0 auto; padding:.8rem 1rem; display:flex; align-items:center; justify-content:space-between; gap:1rem}
+    .logo{display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--text); font-weight:800}
+    .logo img{width:32px; height:32px}
+    .hdr-actions{display:flex; gap:.5rem; align-items:center}
+    .nav a{color:var(--text); text-decoration:none; font-weight:700; opacity:.9; padding:.4rem .7rem; border-radius:10px}
+    .nav a:hover{opacity:1; background:var(--glass)}
+    .theme-toggle{border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:999px; padding:.4rem .7rem; font-weight:700; cursor:pointer}
+
+    /* Layout */
+    .container{max-width:var(--container); margin:0 auto; padding:1rem}
+    .grid{display:grid; grid-template-columns: 300px 1fr; gap:1rem}
+    @media(max-width:900px){ .grid{grid-template-columns:1fr;} }
+
+    /* Sidebar (glassy) */
+    .sidebar{
+      background: var(--glass); border:1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding:1rem;
+    }
+    .profile-mini{display:flex; gap:.8rem; align-items:center; margin-bottom:1rem}
+    .avatar{width:70px; height:70px; border-radius:50%; border:3px solid var(--primary)}
+    .verify{display:inline-flex; align-items:center; gap:.35rem; padding:.25rem .6rem; border-radius:999px; font-weight:700; font-size:.85rem; background:#DCFCE7; color:#166534; border:1px solid #86EFAC}
+    [data-theme="light"] .verify { filter:none }
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem}
+    .stat{background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:.7rem; text-align:center}
+    .stat h3{margin:.25rem 0; font-size:1.4rem}
+
+    .tabs{margin-top:.8rem; display:grid; gap:.5rem}
+    .tab-pill{
+      display:flex; align-items:center; gap:.5rem; width:100%;
+      border:1px solid var(--border); background:var(--surface);
+      border-radius:12px; padding:.6rem .8rem; cursor:pointer; font-weight:800;
+    }
+    .tab-pill.active{border-color:#93C5FD; box-shadow: inset 0 0 0 2px rgba(147,197,253,.35)}
+    .tab-pill .ico{width:24px; height:24px; display:grid; place-items:center; color:#93C5FD}
+
+    /* Content */
+    .content{display:grid; gap:1rem}
+    .card{
+      background: var(--surface); border:1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding:1rem;
+    }
+    .card h2{margin:.2rem 0 1rem; font-weight:800}
+    .row{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem}
+    label{font-weight:700; display:block; margin:.35rem 0 .25rem}
+    input,select,textarea{
+      width:100%; border:1px solid var(--border); border-radius:12px; background:var(--surface-2);
+      color:var(--text); padding:.65rem; font-size:1rem; outline:none;
+    }
+    textarea{min-height:110px; resize:vertical}
     .muted{color:var(--muted)}
-    .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.75rem}
-    .stat{border:1px solid var(--border);border-radius:12px;padding:.8rem;text-align:center}
-    .stat h3{margin:.2rem 0;font-size:1.6rem}
-    .list{display:grid;gap:.6rem}
-    .list-item{border:1px solid var(--border);border-radius:12px;padding:.6rem .8rem;display:flex;justify-content:space-between;align-items:center}
-    .pill{border:1px solid var(--border);border-radius:999px;padding:.25rem .6rem;font-weight:700;background:#fff}
-    .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:.4rem}
-    .day{border:1px solid var(--border);border-radius:10px;padding:.6rem;text-align:center;cursor:pointer}
-    .day.active{background:#DCFCE7;border-color:#86EFAC}
-    .upload{display:grid;gap:.5rem}
-    .media{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem}
-    .media .box{border:1px dashed var(--border);border-radius:12px;height:100px;display:grid;place-items:center;color:var(--muted)}
-    .banner{display:flex;justify-content:space-between;align-items:center;border:1px solid #BFDBFE;background:#EFF6FF;color:#0C4A6E;border-radius:12px;padding:.6rem .8rem}
-    .footer{margin-top:1rem;text-align:center;color:#93C5FD;background:#0F172A;padding:.8rem;border-radius:12px}
-    @media(max-width:820px){.grid{grid-template-columns:1fr}}
+
+    .btn{border:none; border-radius:12px; padding:.7rem 1rem; font-weight:800; cursor:pointer}
+    .btn-primary{background:var(--accent); color:#fff}
+    .btn-primary:hover{background:var(--accent-700)}
+    .btn-secondary{background:transparent; border:2px solid var(--primary); color:var(--primary)}
+    .btn-secondary:hover{background:rgba(37,99,235,.12)}
+    .pill{border:1px solid var(--border); border-radius:999px; padding:.3rem .7rem; font-weight:700; background:var(--surface-2); color:var(--text); cursor:pointer}
+
+    .list{display:grid; gap:.6rem}
+    .list-item{display:flex; justify-content:space-between; align-items:center; gap:.6rem; border:1px solid var(--border); border-radius:12px; padding:.6rem .8rem; background:var(--surface-2)}
+
+    .calendar{display:grid; grid-template-columns:repeat(7,1fr); gap:.35rem}
+    .day{border:1px solid var(--border); border-radius:10px; padding:.55rem; text-align:center; cursor:pointer; background:var(--surface-2)}
+    .day.active{background:#DBEAFE; border-color:#93C5FD; color:#0F172A}
+
+    .media-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:.6rem}
+    .media-box{border:1px dashed var(--border); border-radius:12px; height:110px; display:grid; place-items:center; color:var(--muted); background:var(--surface-2)}
+
+    .banner{
+      display:flex; align-items:center; justify-content:space-between; gap:.8rem;
+      border:1px solid #93C5FD; background:#DBEAFE; color:#0F172A; border-radius:12px; padding:.6rem .8rem;
+    }
+
+    /* Section headers */
+    .cap{display:flex; align-items:center; gap:.5rem; font-weight:800; color:#93C5FD; letter-spacing:.3px; text-transform:uppercase; font-size:.8rem; margin:.2rem 0 .6rem}
+    .cap .bar{height:2px; flex:1; background:linear-gradient(90deg,#93C5FD, transparent)}
+
+    /* Footer */
+    .footer{margin-top:.5rem; text-align:center; color:#93C5FD; background: var(--surface); border:1px solid var(--border); border-radius:12px; padding:.8rem}
+
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <a class="logo" href="index.html">
-      <img src="./assets/img/logo.svg" alt="Pups & Parks logo">
-      <span>Pups & Parks™</span>
-    </a>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="feed.html">Community Feed</a>
-      <a href="profile.html">Profile</a>
-      <a href="workers-dashboard.html" style="background:rgba(255,255,255,.18)">Works Dashboard</a>
-    </nav>
+    <div class="hdr-inner">
+      <a class="logo" href="index.html">
+        <img src="./assets/img/logo.svg" alt="Pups & Parks logo">
+        <span>Pups & Parks™</span>
+      </a>
+      <div class="hdr-actions">
+        <nav class="nav">
+          <a href="index.html">Home</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="feed.html">Community</a>
+          <a href="profile.html">Profile</a>
+          <a href="workers-dashboard-v2.html" style="background:var(--glass)">Works Dashboard</a>
+        </nav>
+        <button class="theme-toggle" id="themeToggle">Toggle theme</button>
+      </div>
+    </div>
   </header>
 
   <main class="container grid">
     <!-- Sidebar -->
-    <aside class="sidebar card">
-      <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem">
-        <img class="avatar" id="avatarPreview" src="./assets/img/default-avatar.png" alt="Avatar">
+    <aside class="sidebar">
+      <div class="profile-mini">
+        <img id="avatarPreview" class="avatar" src="./assets/img/default-avatar.png" alt="Avatar">
         <div>
-          <strong id="namePreview">Your Name</strong>
+          <div style="font-weight:800" id="namePreview">Your Name</div>
           <div class="muted" id="rolePreview">Walker • City</div>
+          <div id="verifyBadge" style="margin-top:.35rem; display:none" class="verify">✔ Verified Walker</div>
         </div>
       </div>
+
       <div class="stats">
         <div class="stat"><div class="muted">Earnings (30d)</div><h3 id="earnings30">£0</h3></div>
         <div class="stat"><div class="muted">Bookings</div><h3 id="bookingsCount">0</h3></div>
         <div class="stat"><div class="muted">Reviews</div><h3 id="reviewsCount">0</h3></div>
       </div>
-      <hr style="border:none;border-top:1px solid var(--border);margin:.8rem 0">
-      <div class="section-title">Dashboard</div>
-      <div class="menu">
-        <button class="active" data-tab="profile">Profile</button>
-        <button data-tab="services">Services</button>
-        <button data-tab="schedule">Schedule</button>
-        <button data-tab="earnings">Earnings</button>
-        <button data-tab="media">Media</button>
-        <button data-tab="connections">Connections</button>
-        <button data-tab="settings">Settings</button>
+
+      <div class="cap"><span>Dashboard</span><div class="bar"></div></div>
+      <div class="tabs">
+        <button class="tab-pill active" data-tab="profile"><span class="ico">👤</span><span>Profile</span></button>
+        <button class="tab-pill" data-tab="services"><span class="ico">🦮</span><span>Services</span></button>
+        <button class="tab-pill" data-tab="schedule"><span class="ico">🗓️</span><span>Schedule</span></button>
+        <button class="tab-pill" data-tab="earnings"><span class="ico">💷</span><span>Earnings</span></button>
+        <button class="tab-pill" data-tab="media"><span class="ico">📸</span><span>Media</span></button>
+        <button class="tab-pill" data-tab="connections"><span class="ico">🤝</span><span>Connections</span></button>
+        <button class="tab-pill" data-tab="settings"><span class="ico">⚙️</span><span>Settings</span></button>
       </div>
     </aside>
 
@@ -101,7 +171,7 @@
     <section class="content">
       <!-- Trial banner -->
       <div class="banner" id="trialBanner" hidden>
-        <div><strong>Free trial active</strong> — <span id="trialCountdown">7 days left</span></div>
+        <div><strong>Free trial</strong> — <span id="trialCountdown">7 days left</span></div>
         <button class="btn btn-secondary" id="upgradeBtn">Upgrade</button>
       </div>
 
@@ -130,7 +200,7 @@
             </select>
           </div>
         </div>
-        <label for="bio" style="margin-top:.6rem">Bio</label>
+        <label for="bio">Bio</label>
         <textarea id="bio" placeholder="Dog lover with 5+ years experience..."></textarea>
         <div class="row">
           <div>
@@ -147,7 +217,7 @@
         </div>
         <div style="margin-top:.6rem;display:flex;gap:.5rem">
           <button class="btn btn-primary" id="saveProfile">Save profile</button>
-          <button class="btn btn-ghost" id="resetProfile">Reset</button>
+          <button class="btn" id="resetProfile">Reset</button>
         </div>
       </div>
 
@@ -172,7 +242,7 @@
         <textarea id="svcDesc" placeholder="Calm, paced walk tailored to your pup"></textarea>
         <div style="margin-top:.6rem;display:flex;gap:.5rem">
           <button class="btn btn-primary" id="addService">Add service</button>
-          <button class="btn btn-ghost" id="clearServices">Clear</button>
+          <button class="btn" id="clearServices">Clear</button>
         </div>
         <div class="list" id="servicesList" style="margin-top:.8rem"></div>
       </div>
@@ -209,7 +279,7 @@
         </div>
         <div style="margin-top:.6rem;display:flex;gap:.5rem">
           <button class="btn btn-primary" id="saveSchedule">Save availability</button>
-          <button class="btn btn-ghost" id="clearSchedule">Clear</button>
+          <button class="btn" id="clearSchedule">Clear</button>
         </div>
         <p class="muted" id="scheduleStatus" style="margin-top:.5rem"></p>
       </div>
@@ -217,10 +287,16 @@
       <!-- Earnings -->
       <div class="card" id="tab-earnings" hidden>
         <h2>Earnings</h2>
-        <div class="stats">
-          <div class="stat"><div class="muted">This month</div><h3 id="earningsMonth">£0</h3></div>
-          <div class="stat"><div class="muted">Last month</div><h3 id="earningsLast">£0</h3></div>
-          <div class="stat"><div class="muted">Total</div><h3 id="earningsTotal">£0</h3></div>
+        <div class="row">
+          <div class="card" style="background:var(--surface-2)">
+            <div class="muted">This month</div><h3 id="earningsMonth">£0</h3>
+          </div>
+          <div class="card" style="background:var(--surface-2)">
+            <div class="muted">Last month</div><h3 id="earningsLast">£0</h3>
+          </div>
+          <div class="card" style="background:var(--surface-2)">
+            <div class="muted">Total</div><h3 id="earningsTotal">£0</h3>
+          </div>
         </div>
         <div class="row" style="margin-top:.8rem">
           <div>
@@ -235,12 +311,14 @@
       <!-- Media -->
       <div class="card" id="tab-media" hidden>
         <h2>Media</h2>
-        <div class="upload">
-          <label>Add image/video URL</label>
-          <input id="mediaUrl" placeholder="https://...">
-          <button class="btn btn-primary" id="addMedia">Add to gallery</button>
+        <div class="row">
+          <div>
+            <label>Image/video URL</label>
+            <input id="mediaUrl" placeholder="https://...">
+            <button class="btn btn-primary" id="addMedia" style="margin-top:.5rem">Add</button>
+          </div>
         </div>
-        <div class="media" id="mediaGrid" style="margin-top:.8rem"></div>
+        <div class="media-grid" id="mediaGrid" style="margin-top:.8rem"></div>
       </div>
 
       <!-- Connections -->
@@ -278,16 +356,28 @@
         </div>
         <div style="margin-top:.6rem;display:flex;gap:.5rem">
           <button class="btn btn-primary" id="saveSettings">Save settings</button>
-          <button class="btn btn-ghost" id="resetAll">Reset all data</button>
+          <button class="btn" id="resetAll">Reset all data</button>
         </div>
         <p class="muted" id="settingsStatus" style="margin-top:.5rem"></p>
       </div>
 
-      <div class="footer">© 2025 Pups & Parks™ — Walker dashboard</div>
+      <div class="footer">© 2025 Pups & Parks™ — Walker dashboard v2</div>
     </section>
   </main>
 
   <script>
+    // Theme toggle
+    const tBtn=document.getElementById('themeToggle');
+    const root=document.documentElement;
+    const storedTheme=localStorage.getItem('pp_theme')||'light';
+    document.documentElement.setAttribute('data-theme', storedTheme);
+    tBtn.addEventListener('click',()=>{
+      const cur=root.getAttribute('data-theme');
+      const next= cur==='light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('pp_theme', next);
+    });
+
     // Storage helpers
     const S = {
       get: (k, fallback) => { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? fallback; } catch { return fallback; } },
@@ -296,9 +386,9 @@
 
     // Tabs
     const tabs = ['profile','services','schedule','earnings','media','connections','settings'];
-    document.querySelectorAll('.menu button').forEach(btn=>{
+    document.querySelectorAll('.tab-pill').forEach(btn=>{
       btn.addEventListener('click',()=>{
-        document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
+        document.querySelectorAll('.tab-pill').forEach(b=>b.classList.remove('active'));
         btn.classList.add('active');
         const t = btn.getAttribute('data-tab');
         tabs.forEach(id=>{
@@ -326,7 +416,7 @@
         fullName: 'Your Name', handle: '@handle', city: 'Your City',
         role: 'Walker', bio: '', avatarUrl: './assets/img/default-avatar.png', verify: false
       });
-      // Fill inputs
+      // Inputs
       ['fullName','handle','city','role','bio','avatarUrl'].forEach(id=>{
         const el=document.getElementById(id); if(el) el.value = data[id] ?? '';
       });
@@ -335,9 +425,12 @@
       const namePrev=document.getElementById('namePreview');
       const rolePrev=document.getElementById('rolePreview');
       const avatarPrev=document.getElementById('avatarPreview');
-      const syncPreview=()=>{ namePrev.textContent = data.fullName || 'Your Name';
+      const verifyBadge=document.getElementById('verifyBadge');
+      const syncPreview=()=>{ 
+        namePrev.textContent = data.fullName || 'Your Name';
         rolePrev.textContent = `${data.role} • ${data.city||'City'}`;
         avatarPrev.src = data.avatarUrl || './assets/img/default-avatar.png';
+        verifyBadge.style.display = data.verify ? 'inline-flex' : 'none';
       };
       syncPreview();
       // Save / reset
@@ -379,7 +472,7 @@
         const desc=document.getElementById('svcDesc').value.trim();
         if(!name || price<=0 || duration<=0){ alert('Please fill service name, price, duration.'); return; }
         const cur=S.get('pp_services',[]); cur.push({name,price,duration,desc}); S.set('pp_services',cur);
-        document.getElementById('svcName').value=''; document.getElementById('svcPrice').value=''; document.getElementById('svcDuration').value=''; document.getElementById('svcDesc').value='';
+        ['svcName','svcPrice','svcDuration','svcDesc'].forEach(id=>document.getElementById(id).value='');
         render();
       });
       document.getElementById('clearServices').addEventListener('click',()=>{ localStorage.removeItem('pp_services'); render(); });
@@ -390,7 +483,6 @@
       const daysEl=document.getElementById('daysGrid');
       const status=document.getElementById('scheduleStatus');
       const data=S.get('pp_schedule',{days:[],start:'09:00',end:'18:00'});
-      // init UI
       daysEl.querySelectorAll('.day').forEach(d=>{
         if(data.days.includes(d.dataset.day)) d.classList.add('active');
         d.addEventListener('click',()=>{
@@ -428,12 +520,10 @@
         items.forEach(it=>{ total+=it.amount; const d=new Date(it.ts); if(d.getMonth()===month && d.getFullYear()===year) curMonth+=it.amount;
           if(d.getMonth()===lastMonthIdx && d.getFullYear()===lastYear) lastMonth+=it.amount; });
         totalEl.textContent=`£${total}`; monthEl.textContent=`£${curMonth}`; lastEl.textContent=`£${lastMonth}`;
-        // 30d calc
         const cutoff=Date.now()-30*86400000; const last30=items.filter(i=>i.ts>=cutoff).reduce((s,i)=>s+i.amount,0);
         thirtyEl.textContent=`£${last30}`;
         bookingsEl.textContent=items.length;
         reviewsEl.textContent=S.get('pp_reviews',[]).length;
-        // list
         listEl.innerHTML='';
         items.slice().reverse().forEach((i,idx)=>{
           const row=document.createElement('div'); row.className='list-item';
@@ -458,7 +548,7 @@
         const items=S.get('pp_media',[]);
         grid.innerHTML='';
         items.forEach((url,i)=>{
-          const box=document.createElement('div'); box.className='box';
+          const box=document.createElement('div'); box.className='media-box';
           box.innerHTML=`<div style="display:grid;gap:.4rem;place-items:center"><div class="muted">${url.length>18?url.slice(0,18)+'…':url}</div><button class="pill" data-i="${i}">Remove</button></div>`;
           box.querySelector('button').addEventListener('click',()=>{
             const cur=S.get('pp_media',[]); cur.splice(i,1); S.set('pp_media',cur); render();
