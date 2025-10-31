@@ -23,4 +23,4 @@ function setMouse(e) {
   const x = e.clientX ?? (e.touches && e.touches[0].clientX);
   const y = e.clientY ?? (e.touches && e.touches[0].clientY);
   if (x == null || y == null) return;
-  mouseX = x
+  mouseX =
