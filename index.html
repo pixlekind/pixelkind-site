@@ -3,82 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pups & Parks™ — Trusted walks. No ads.</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <title>Pups & Parks™ — Walks, Trust & Community</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family:'Inter', sans-serif; background:#F8FAFC; color:#0F172A; }
+    header { position:absolute; top:0; left:0; right:0; z-index:10; display:flex; justify-content:space-between; align-items:center; padding:1.2rem 2rem; }
+    header a { color:#fff; text-decoration:none; font-weight:600; margin-left:1.5rem; }
+    .hero { position:relative; height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff; }
+    .hero::before { content:""; position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1507149833265-60c372daea22?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; filter:brightness(0.45); }
+    .hero-content { position:relative; z-index:1; max-width:800px; padding:0 1rem; }
+    .hero h1 { font-size:3rem; font-weight:800; margin-bottom:1rem; }
+    .hero p { font-size:1.25rem; margin-bottom:2rem; color:#E2E8F0; }
+    .btn { display:inline-block; padding:1rem 2rem; border-radius:12px; font-weight:700; text-decoration:none; }
+    .btn-primary { background:#22C55E; color:#fff; }
+    .btn-primary:hover { background:#16A34A; }
+    .btn-secondary { background:#fff; color:#2563EB; margin-left:1rem; }
+    section { padding:4rem 2rem; max-width:1100px; margin:auto; }
+    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; margin-top:2rem; }
+    .feature { background:#fff; border-radius:14px; padding:2rem; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+    .feature h3 { margin-top:0; color:#2563EB; }
+    footer { background:#0F172A; color:#CBD5E1; text-align:center; padding:2rem; margin-top:4rem; }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <a class="logo" href="index.html">
-      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" />
-      <span>Pups & Parks™</span>
-    </a>
-    <nav aria-label="Primary" class="nav">
-      <a href="index.html" class="active">Home</a>
+  <header>
+    <div style="color:#fff; font-weight:800;">Pups & Parks™</div>
+    <nav>
+      <a href="index.html">Home</a>
       <a href="pricing.html">Pricing</a>
-      <a href="feed.html">Community Feed</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="feed.html">Community</a>
+      <a href="profile.html">Profile</a>
     </nav>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>Safe paws, trusted walks — one flat fee, unlimited freedom.</h1>
-      <p class="sub">No ads. No cuts. No contracts. Just trusted walks.</p>
-      <div class="hero-ctas">
-        <button class="btn btn-primary" onclick="location.href='pricing.html'">Start free trial</button>
-        <button class="btn btn-secondary" onclick="location.href='feed.html'">Explore community</button>
-      </div>
-    </section>
-
-    <section class="features container">
-      <div class="feature-card">
-        <div class="icon">🐾</div>
-        <h3>Trust & safety</h3>
-        <p>Verified walkers, incident reporting, and admin oversight. Confidence baked in.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">🌳</div>
-        <h3>Parks discovery</h3>
-        <p>Find safe, beautiful parks with reviews, photos, and routes.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">💬</div>
-        <h3>Community feed</h3>
-        <p>Share walks, tips, and pup stories—without ads or clutter.</p>
-      </div>
-      <div class="feature-card">
-        <div class="icon">💸</div>
-        <h3>Flat fee</h3>
-        <p>Walkers pay £25/month, keep 100% of earnings. Owners book for free.</p>
-      </div>
-    </section>
-
-    <section class="cta container card">
-      <h2>Ready to walk free and earn more?</h2>
-      <p>Start your 7‑day trial today. Cancel anytime.</p>
-      <button class="btn btn-primary" onclick="location.href='pricing.html'">Get started</button>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner container">
-      <div class="footer-brand">
-        <img src="./assets/img/logo.svg" alt="Pups & Parks logo small" />
-        <span>Pups & Parks™</span>
-      </div>
-      <nav aria-label="Footer" class="footer-nav">
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="feed.html">Community</a>
-      </nav>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Walks You Can Trust. Parks You’ll Love.</h1>
+      <p>Discover trusted walkers, explore local parks, and join a community built for pups and their people.</p>
+      <a href="pricing.html" class="btn btn-primary">Start Free Trial</a>
+      <a href="feed.html" class="btn btn-secondary">Join Community</a>
     </div>
-    <p class="legal">© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
-  </footer>
+  </section>
 
-  <script src="./assets/js/main.js"></script>
+  <!-- Features -->
+  <section>
+    <h2 style="text-align:center; font-size:2rem; font-weight:800;">Why Pups & Parks™?</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>🐾 Trusted Walkers</h3>
+        <p>Every walker is vetted and reviewed. Safety and trust are at the core of every booking.</p>
+      </div>
+      <div class="feature">
+        <h3>🌳 Park Discovery</h3>
+        <p>Find the best local parks and routes, curated by the community and updated in real time.</p>
+      </div>
+      <div class="feature">
+        <h3>🤝 Community Feed</h3>
+        <p>Share walks, photos, and tips in a vibrant, ad‑free social feed built for dog lovers.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Pups & Parks™ — Built for trust, freedom, and community.
+  </footer>
 </body>
 </html>
