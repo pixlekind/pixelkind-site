@@ -91,7 +91,7 @@ footer { text-align: center; padding: 2rem; background: #111; font-size: 0.9rem;
   transform: translate(-50%, -50%);
 }
 
-/* Trail canvas sits behind UI but above background */
+/* Trail canvas */
 #cursor-trail {
   position: fixed;
   inset: 0;
