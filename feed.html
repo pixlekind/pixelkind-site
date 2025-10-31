@@ -59,5 +59,63 @@
   </footer>
 
   <script src="./assets/js/main.js"></script>
+  <script type="module">
+  // Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } 
+    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // Your Firebase config (from Firebase Console → Project settings)
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT.firebaseapp.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Reference to posts collection
+  const postsRef = collection(db, "posts");
+
+  // Handle new post submission
+  const postBtn = document.getElementById("postBtn");
+  const textarea = document.getElementById("composerText");
+  postBtn.addEventListener("click", async () => {
+    if (textarea.value.trim() === "") return;
+    await addDoc(postsRef, {
+      username: "Demo User", // Replace with logged-in user
+      content: textarea.value,
+      timestamp: serverTimestamp()
+    });
+    textarea.value = "";
+  });
+
+  // Real-time feed listener
+  const feed = document.getElementById("feed");
+  const q = query(postsRef, orderBy("timestamp", "desc"));
+  onSnapshot(q, (snapshot) => {
+    feed.innerHTML = "";
+    snapshot.forEach((doc) => {
+      const post = doc.data();
+      feed.innerHTML += `
+        <div class="post">
+          <div class="post-header">
+            <div class="avatar"></div>
+            <div>
+              <div class="username">${post.username}</div>
+              <div class="timestamp">${post.timestamp?.toDate().toLocaleString() || ""}</div>
+            </div>
+          </div>
+          <div class="content">${post.content}</div>
+        </div>
+      `;
+    });
+  });
+</script>
+
 </body>
 </html>
