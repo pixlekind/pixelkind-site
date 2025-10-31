@@ -3,119 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Community Feed — Pups & Parks™</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <title>Pups & Parks™ Community Feed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family:'Inter', sans-serif; background:#F1F5F9; color:#0F172A; }
+    header { background:#2563EB; color:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:10; }
+    header a { color:#fff; text-decoration:none; font-weight:600; margin-left:1.5rem; }
+    .container { max-width:800px; margin:2rem auto; padding:0 1rem; }
+    .composer { background:#fff; border-radius:14px; padding:1rem; box-shadow:0 6px 18px rgba(0,0,0,0.08); margin-bottom:2rem; }
+    .composer textarea { width:100%; border:none; resize:none; font-size:1rem; padding:.5rem; border-radius:10px; background:#F8FAFC; }
+    .composer button { margin-top:.8rem; background:#2563EB; color:#fff; border:none; padding:.6rem 1.2rem; border-radius:10px; font-weight:700; cursor:pointer; }
+    .feed { display:flex; flex-direction:column; gap:1.5rem; }
+    .post { background:#fff; border-radius:14px; padding:1rem; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+    .post-header { display:flex; align-items:center; gap:.8rem; margin-bottom:.8rem; }
+    .avatar { width:45px; height:45px; border-radius:50%; background:#CBD5E1; }
+    .username { font-weight:700; }
+    .timestamp { font-size:.85rem; color:#64748B; }
+    .post img { width:100%; border-radius:12px; margin-top:.8rem; }
+    .actions { display:flex; justify-content:space-around; margin-top:.8rem; font-size:.9rem; color:#475569; border-top:1px solid #E2E8F0; padding-top:.5rem; }
+    .actions button { background:none; border:none; cursor:pointer; font-weight:600; color:#2563EB; }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <a class="logo" href="index.html">
-      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" />
-      <span>Pups & Parks™</span>
-    </a>
-    <nav aria-label="Primary" class="nav">
+  <header>
+    <div style="font-weight:800;">Pups & Parks™</div>
+    <nav>
       <a href="index.html">Home</a>
       <a href="pricing.html">Pricing</a>
-      <a href="feed.html" class="active">Community Feed</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
+      <a href="feed.html" style="text-decoration:underline">Community</a>
+      <a href="profile.html">Profile</a>
     </nav>
   </header>
 
   <main class="container">
-    <section class="feed-header">
-      <h1>Community feed</h1>
-      <p>Share your walks, park tips, and pup stories. Be kind. No ads or spam.</p>
-    </section>
-
-    <section class="card composer">
-      <form id="postForm" aria-label="Create a post">
-        <label class="sr-only" for="postContent">Post content</label>
-        <textarea id="postContent" placeholder="Share your walk, park, or pup story..." maxlength="500"></textarea>
-        <div class="composer-actions">
-          <button type="submit" class="btn btn-primary">Post</button>
-          <span id="charCount" class="muted">0 / 500</span>
-        </div>
-      </form>
-    </section>
-
-    <section id="posts" class="feed-list"></section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner container">
-      <div class="footer-brand">
-        <img src="./assets/img/logo.svg" alt="Pups & Parks logo small" />
-        <span>Pups & Parks™</span>
-      </div>
-      <nav aria-label="Footer" class="footer-nav">
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="feed.html">Community</a>
-      </nav>
+    <!-- Composer -->
+    <div class="composer">
+      <textarea id="composerText" rows="3" placeholder="Share your walk, park discovery, or pup moment..."></textarea>
+      <button id="postBtn">Post</button>
     </div>
-    <p class="legal">© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
-  </footer>
 
-  <script src="./assets/js/main.js"></script>
-  <script type="module">
-  // Import Firebase
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } 
-    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-  // Your Firebase config (from Firebase Console → Project settings)
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  // Reference to posts collection
-  const postsRef = collection(db, "posts");
-
-  // Handle new post submission
-  const postBtn = document.getElementById("postBtn");
-  const textarea = document.getElementById("composerText");
-  postBtn.addEventListener("click", async () => {
-    if (textarea.value.trim() === "") return;
-    await addDoc(postsRef, {
-      username: "Demo User", // Replace with logged-in user
-      content: textarea.value,
-      timestamp: serverTimestamp()
-    });
-    textarea.value = "";
-  });
-
-  // Real-time feed listener
-  const feed = document.getElementById("feed");
-  const q = query(postsRef, orderBy("timestamp", "desc"));
-  onSnapshot(q, (snapshot) => {
-    feed.innerHTML = "";
-    snapshot.forEach((doc) => {
-      const post = doc.data();
-      feed.innerHTML += `
-        <div class="post">
-          <div class="post-header">
-            <div class="avatar"></div>
-            <div>
-              <div class="username">${post.username}</div>
-              <div class="timestamp">${post.timestamp?.toDate().toLocaleString() || ""}</div>
-            </div>
+    <!-- Feed -->
+    <div id="feed" class="feed">
+      <!-- Example Post -->
+      <div class="post">
+        <div class="post-header">
+          <div class="avatar"></div>
+          <div>
+            <div class="username">Sarah W.</div>
+            <div class="timestamp">2h ago</div>
           </div>
-          <div class="content">${post.content}</div>
         </div>
-      `;
-    });
-  });
-</script>
-
+        <div class="content">
+          Had the best walk at Hyde Park today 🌳🐕
+          <img src="https://placekitten.com/800/400" alt="Post image">
+        </div>
+        <div class="actions">
+          <button>👍 Like</button>
+          <button>💬 Comment</button>
+          <button>↗ Share</button>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
