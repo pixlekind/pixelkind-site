@@ -8,17 +8,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Animated Orbs -->
+  <!-- Orbs -->
   <div class="orb orb-cyan"></div>
   <div class="orb orb-magenta"></div>
   <div class="orb orb-orange"></div>
   <div class="orb orb-blue"></div>
   <div class="orb orb-green"></div>
 
-  <!-- Cursor -->
   <div class="cursor"></div>
 
-  <!-- Navbar -->
   <nav class="navbar">
     <a href="index.html">Home</a>
     <a href="apps.html">Apps</a>
@@ -26,7 +24,6 @@
     <a href="contact.html">Contact</a>
   </nav>
 
-  <!-- Hero -->
   <header class="hero">
     <h1>Pixelkind</h1>
     <p>Your branded hub for apps, experiments, and cinematic digital tools.</p>
@@ -35,30 +32,10 @@
     </div>
   </header>
 
-  <!-- Footer -->
   <footer>
     <p>© 2025 Pixelkind — Built by Keiren</p>
   </footer>
 
-  <!-- Scripts -->
-  <script>
-    const cursor = document.querySelector('.cursor');
-    const orbs = document.querySelectorAll('.orb');
-
-    // Cursor follows mouse
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.pageX + 'px';
-      cursor.style.top = e.pageY + 'px';
-
-      // Parallax effect for orbs
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 30;
-
-      orbs.forEach((orb, i) => {
-        const speed = (i + 1) * 0.3;
-        orb.style.transform = `translate(${x * speed}px, ${y * speed}px)`;
-      });
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
