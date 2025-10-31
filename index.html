@@ -4,33 +4,40 @@
   <meta charset="UTF-8">
   <title>Pixelkind AI Workers™</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="cursor"></div>
 
+  <!-- Hero -->
   <header class="hero">
     <h1>Pixelkind AI Workers™</h1>
-    <p>Cinematic branded AI workforce — installable, role-aware, unforgettable.</p>
-    <a href="https://studio-3250182888-915fd.web.app" class="btn">🚀 Launch App</a>
+    <p>Cinematic branded AI workforce — installable, role‑aware, unforgettable.</p>
+    <div class="cta">
+      <a href="https://studio-3250182888-915fd.web.app" class="btn">🚀 Launch App</a>
+      <a href="#orbs" class="btn secondary">✨ Meet the Workers</a>
+    </div>
   </header>
 
-  <section class="orb-grid">
-    <div class="orb cyan">Nova<br><span>Strategist</span></div>
-    <div class="orb blue">Kai<br><span>Intuitive</span></div>
-    <div class="orb orange">Echo<br><span>Analyst</span></div>
-    <div class="orb ring">Muse<br><span>Creative</span></div>
-    <div class="orb glass">Lumen<br><span>Analyst</span></div>
-    <div class="orb molten">Forge<br><span>Executor</span></div>
-    <div class="orb magenta">Clause<br><span>Legal</span></div>
+  <!-- Orb Grid -->
+  <section id="orbs" class="orb-grid">
+    <div class="orb cyan"><span>Nova</span><small>Strategist</small></div>
+    <div class="orb blue"><span>Kai</span><small>Intuitive</small></div>
+    <div class="orb orange"><span>Echo</span><small>Analyst</small></div>
+    <div class="orb ring"><span>Muse</span><small>Creative</small></div>
+    <div class="orb glass"><span>Lumen</span><small>Analyst</small></div>
+    <div class="orb molten"><span>Forge</span><small>Executor</small></div>
+    <div class="orb magenta"><span>Clause</span><small>Legal</small></div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>© 2025 Pixelkind AI Workers™ — Built by Keiren</p>
   </footer>
 
   <script>
-    // Magic cursor trail
+    // Magic cursor
     const cursor = document.querySelector('.cursor');
     document.addEventListener('mousemove', e => {
       cursor.style.left = e.pageX + 'px';
