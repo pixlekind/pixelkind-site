@@ -19,7 +19,6 @@
     .avatar { width:45px; height:45px; border-radius:50%; background:#CBD5E1; }
     .username { font-weight:700; }
     .timestamp { font-size:.85rem; color:#64748B; }
-    .post img { width:100%; border-radius:12px; margin-top:.8rem; }
     .actions { display:flex; justify-content:space-around; margin-top:.8rem; font-size:.9rem; color:#475569; border-top:1px solid #E2E8F0; padding-top:.5rem; }
     .actions button { background:none; border:none; cursor:pointer; font-weight:600; color:#2563EB; }
   </style>
@@ -43,27 +42,54 @@
     </div>
 
     <!-- Feed -->
-    <div id="feed" class="feed">
-      <!-- Example Post -->
-      <div class="post">
-        <div class="post-header">
-          <div class="avatar"></div>
-          <div>
-            <div class="username">Sarah W.</div>
-            <div class="timestamp">2h ago</div>
-          </div>
-        </div>
-        <div class="content">
-          Had the best walk at Hyde Park today 🌳🐕
-          <img src="https://placekitten.com/800/400" alt="Post image">
-        </div>
-        <div class="actions">
-          <button>👍 Like</button>
-          <button>💬 Comment</button>
-          <button>↗ Share</button>
-        </div>
-      </div>
-    </div>
+    <div id="feed" class="feed"></div>
   </main>
+
+  <script>
+    const feed = document.getElementById("feed");
+    const textarea = document.getElementById("composerText");
+    const postBtn = document.getElementById("postBtn");
+
+    // Load posts from localStorage
+    let posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+    function renderFeed() {
+      feed.innerHTML = "";
+      posts.forEach(post => {
+        feed.innerHTML += `
+          <div class="post">
+            <div class="post-header">
+              <div class="avatar"></div>
+              <div>
+                <div class="username">${post.username}</div>
+                <div class="timestamp">${post.timestamp}</div>
+              </div>
+            </div>
+            <div class="content">${post.content}</div>
+            <div class="actions">
+              <button>👍 Like</button>
+              <button>💬 Comment</button>
+              <button>↗ Share</button>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    postBtn.addEventListener("click", () => {
+      if (textarea.value.trim() === "") return;
+      const newPost = {
+        username: "Demo User", // Replace with logged-in user later
+        content: textarea.value,
+        timestamp: new Date().toLocaleString()
+      };
+      posts.unshift(newPost); // newest first
+      localStorage.setItem("posts", JSON.stringify(posts));
+      textarea.value = "";
+      renderFeed();
+    });
+
+    renderFeed();
+  </script>
 </body>
 </html>
