@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Pixelkind</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="cursor"></div>
+
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="apps.html">Apps</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <header class="hero small">
+    <h1>Contact Us</h1>
+    <p>Let’s build the future together</p>
+  </header>
+
+  <section class="content">
+    <p>Email: <a href="mailto:hello@pixelkind.ai">hello@pixelkind.ai</a></p>
+    <p>GitHub: <a href="https://github.com/pixlekind">github.com/pixlekind</a></p>
+    <p>Twitter: <a href="#">@PixelkindAI</a></p>
+  </section>
+
+  <footer>
+    <p>© 2025 Pixelkind AI Workers™ — Built by Keiren</p>
+  </footer>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.pageX + 'px';
+      cursor.style.top = e.pageY + 'px';
+    });
+  </script>
+</body>
+</html>
