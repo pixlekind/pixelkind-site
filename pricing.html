@@ -10,6 +10,27 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/modernization.css">
   <link rel="stylesheet" href="https://unpkg.com/lucide@latest/font/lucide.min.css">
+
+  <style>
+    /* Quick readability fixes */
+    body {
+      color: #111827; /* dark neutral */
+      background: #f9fafb;
+    }
+    p, li, span {
+      color: #374151;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      color: #111827;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .btn {
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -26,8 +47,8 @@
         <li><a href="profile.html" class="nav-link">Profile</a></li>
       </ul>
       <div class="nav-actions">
-        <button class="btn btn-secondary">Sign In</button>
-        <button class="btn btn-primary">Start Free Trial</button>
+        <a href="profile.html" class="btn btn-secondary">Sign In</a>
+        <a href="pricing.html" class="btn btn-primary">Start Free Trial</a>
       </div>
     </nav>
   </header>
@@ -65,7 +86,7 @@
             <li><i data-lucide="check"></i><span>Community access</span></li>
             <li><i data-lucide="check"></i><span>24/7 customer support</span></li>
           </ul>
-          <button class="btn btn-primary btn-full">Get Started Free</button>
+          <a href="client-dashboard.html" class="btn btn-primary btn-full">Get Started Free</a>
         </div>
 
         <!-- Walker Plan -->
