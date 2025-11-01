@@ -4,74 +4,84 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pups & Parks™ — Community Feed</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css" />
+  <meta name="description" content="Join the Pups & Parks™ community feed — share walks, park tips, and pup moments." />
 </head>
+
 <body>
   <!-- Header -->
   <header class="site-header">
-    <a href="index.html" class="logo">
-      <span class="brand-mark">🐾</span>
-      <span>Pups & Parks™</span>
-    </a>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="feed.html" class="active">Community</a>
-      <a href="profile.html">Profile</a>
-    </nav>
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="Pups & Parks Home">
+        <span class="brand-mark">🐾</span>
+        <span class="brand-text">Pups & Parks™</span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="feed.html" class="active">Community</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <!-- Banner -->
   <section class="section-tight">
     <div class="container">
-      <div class="banner banner-info">
-        <div><strong>Community feed</strong> — share walks, park tips, and pup moments.</div>
-        <div class="muted">Demo mode (localStorage)</div>
+      <div class="banner banner-info lift">
+        <div><strong>Community Feed</strong> — share walks, park tips, and pup moments.</div>
+        <div class="muted">Demo mode (saved in localStorage)</div>
       </div>
     </div>
   </section>
 
   <!-- Stories -->
   <section class="section-tight">
-    <div class="container card">
+    <div class="container card stories-bar">
       <div class="stories">
-        <div class="story">
-          <div class="story-ring"><img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=200&auto=format&fit=crop" alt="Create story"></div>
-          <p class="muted" style="font-size:.8rem;margin-top:.3rem">Create</p>
+        <div class="story create-story">
+          <div class="story-ring">
+            <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=200&auto=format&fit=crop" alt="Create story">
+          </div>
+          <p class="muted small">Create</p>
         </div>
-        <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b6?q=80&w=200&auto=format&fit=crop" alt="Olima"></div><p class="muted" style="font-size:.8rem;margin-top:.3rem">Olima</p></div>
-        <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=200&auto=format&fit=crop" alt="Ivanita"></div><p class="muted" style="font-size:.8rem;margin-top:.3rem">Ivanita</p></div>
-        <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=200&auto=format&fit=crop" alt="Finn"></div><p class="muted" style="font-size:.8rem;margin-top:.3rem">Finn</p></div>
+
+        <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b6?q=80&w=200&auto=format&fit=crop" alt="Olima"></div><p class="muted small">Olima</p></div>
+        <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=200&auto=format&fit=crop" alt="Ivanita"></div><p class="muted small">Ivanita</p></div>
+        <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=200&auto=format&fit=crop" alt="Finn"></div><p class="muted small">Finn</p></div>
       </div>
     </div>
   </section>
 
   <!-- Composer + Feed -->
   <main class="section">
-    <div class="container grid-2">
+    <div class="container feed-layout">
       <!-- Composer -->
-      <div>
-        <div class="card composer">
-          <h2 class="h3">Create a post</h2>
-          <label for="composerText" class="muted">Share a thought, park discovery, or pup photo (paste URL)</label>
-          <textarea id="composerText" placeholder="What's on your mind?"></textarea>
-          <label for="imageUrl" class="mt-2">Image URL (optional)</label>
-          <input id="imageUrl" type="url" placeholder="https://...">
-          <div class="composer-actions" style="display:flex;gap:.6rem;justify-content:flex-end;margin-top:var(--s3)">
-            <button id="postBtn" class="btn btn-primary btn-pill">Post</button>
-            <button id="clearBtn" class="btn btn-outline btn-pill">Clear demo data</button>
-          </div>
+      <aside class="composer card lift">
+        <h2 class="h3">Create a Post</h2>
+        <label for="composerText" class="muted">Share a thought, park discovery, or pup photo (paste image URL)</label>
+        <textarea id="composerText" placeholder="What's on your mind?" rows="3"></textarea>
+
+        <label for="imageUrl" class="muted mt-2">Image URL (optional)</label>
+        <input id="imageUrl" type="url" placeholder="https://..." />
+
+        <div class="composer-actions">
+          <button id="postBtn" class="btn btn-primary btn-pill">Post</button>
+          <button id="clearBtn" class="btn btn-outline btn-pill">Clear demo data</button>
         </div>
-      </div>
+      </aside>
 
       <!-- Feed -->
-      <div>
-        <div class="feed-header center" style="text-align:center">
-          <h2 class="h2">Latest posts</h2>
+      <section class="feed-section">
+        <header class="feed-header center">
+          <h2 class="h2">Latest Posts</h2>
           <p class="sub">Posts are saved locally and appear instantly.</p>
-        </div>
+        </header>
+
         <div id="feed" class="feed-list mt-4"></div>
-      </div>
+      </section>
     </div>
   </main>
 
@@ -79,11 +89,13 @@
   <footer class="site-footer">
     <div class="footer-inner container">
       <div class="footer-brand">🐾 Pups & Parks™</div>
-      <nav class="footer-nav">
-        <a href="index.html">Home</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="feed.html">Community</a>
-        <a href="profile.html">Profile</a>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="feed.html">Community</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
       </nav>
     </div>
     <p class="legal">© 2025 Pups & Parks™. All rights reserved.</p>
@@ -108,26 +120,29 @@
         const imgHTML = p.imageUrl ? `<img class="post-image" src="${p.imageUrl}" alt="Post image">` : "";
         const commentsHTML = (p.comments||[]).map(c => `<div class="comment">${c}</div>`).join("");
         feed.innerHTML += `
-          <div class="post-card lift">
-            <div class="post-meta">
+          <article class="post-card lift">
+            <header class="post-meta">
               <div class="avatar"></div>
-              <div><strong>${p.user}</strong><br><span class="muted" style="font-size:.9rem">${p.time}</span></div>
-            </div>
+              <div><strong>${p.user}</strong><br><span class="muted small">${p.time}</span></div>
+            </header>
+
             <p>${p.text}</p>
             ${imgHTML}
+
             <div class="post-actions">
-              <span class="pill" onclick="likePost(${i})">👍 Like (${p.likes||0})</span>
-              <span class="pill" onclick="toggleComment(${i})">💬 Comment</span>
-              <span class="pill" onclick="sharePost(${i})">↗ Share</span>
+              <button class="pill" onclick="likePost(${i})">👍 Like (${p.likes||0})</button>
+              <button class="pill" onclick="toggleComment(${i})">💬 Comment</button>
+              <button class="pill" onclick="sharePost(${i})">↗ Share</button>
             </div>
+
             <div id="comments-${i}" class="comment-box" style="display:none">
               <div id="comments-list-${i}">${commentsHTML || '<div class="muted">No comments yet</div>'}</div>
-              <div style="display:flex;gap:.6rem;margin-top:.6rem">
-                <input id="comment-input-${i}" type="text" placeholder="Write a comment...">
+              <div class="comment-form">
+                <input id="comment-input-${i}" type="text" placeholder="Write a comment..." />
                 <button class="btn btn-secondary btn-pill" onclick="addComment(${i})">Post</button>
               </div>
             </div>
-          </div>`;
+          </article>`;
       });
     }
 
@@ -137,7 +152,7 @@
       if (!text) return;
       posts.unshift({ user:"Demo User", text, imageUrl:img, time:new Date().toLocaleString(), likes:0, comments:[] });
       localStorage.setItem("pp_posts", JSON.stringify(posts));
-      textarea.value=""; imageUrl.value="";
+      textarea.value = ""; imageUrl.value = "";
       renderFeed();
     });
 
@@ -147,23 +162,29 @@
       renderFeed();
     });
 
-    window.likePost = i => { posts[i].likes++; localStorage.setItem("pp_posts", JSON.stringify(posts)); renderFeed(); };
+    window.likePost = i => {
+      posts[i].likes++;
+      localStorage.setItem("pp_posts", JSON.stringify(posts));
+      renderFeed();
+    };
+
     window.toggleComment = i => {
-      const box = document.getElementById("comments-"+i);
+      const box = document.getElementById("comments-" + i);
       box.style.display = box.style.display === "none" ? "block" : "none";
     };
+
     window.addComment = i => {
-      const input = document.getElementById("comment-input-"+i);
+      const input = document.getElementById("comment-input-" + i);
       const val = input.value.trim();
-      if(!val) return;
+      if (!val) return;
       posts[i].comments.push(val);
       localStorage.setItem("pp_posts", JSON.stringify(posts));
-      input.value="";
+      input.value = "";
       renderFeed();
       toggleComment(i);
     };
-    window.sharePost = i => alert("Shared post "+(i+1));
 
+    window.sharePost = i => alert("Shared post " + (i + 1));
     renderFeed();
   </script>
 </body>
