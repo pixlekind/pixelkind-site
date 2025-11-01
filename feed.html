@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pups & Parks™ — Community Feed</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <!-- Header -->
   <header class="site-header">
-    <a href="index.html" class="logo"><span class="brand-mark">🐾</span><span>Pups & Parks™</span></a>
-    <nav class="nav"><a href="index.html">Home</a><a href="pricing.html">Pricing</a><a href="feed.html" class="active">Community</a><a href="profile.html">Profile</a></nav>
+    <a href="index.html" class="logo">
+      <span class="brand-mark">🐾</span>
+      <span>Pups & Parks™</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="feed.html" class="active">Community</a>
+      <a href="profile.html">Profile</a>
+    </nav>
   </header>
 
   <!-- Banner -->
@@ -65,15 +75,21 @@
     </div>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-inner container">
       <div class="footer-brand">🐾 Pups & Parks™</div>
-      <nav class="footer-nav"><a href="index.html">Home</a><a href="pricing.html">Pricing</a><a href="feed.html">Community</a><a href="profile.html">Profile</a></nav>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="feed.html">Community</a>
+        <a href="profile.html">Profile</a>
+      </nav>
     </div>
     <p class="legal">© 2025 Pups & Parks™. All rights reserved.</p>
   </footer>
 
-  <!-- Feed logic -->
+  <!-- Feed Logic -->
   <script>
     const feed = document.getElementById("feed");
     const textarea = document.getElementById("composerText");
@@ -92,7 +108,7 @@
         const imgHTML = p.imageUrl ? `<img class="post-image" src="${p.imageUrl}" alt="Post image">` : "";
         const commentsHTML = (p.comments||[]).map(c => `<div class="comment">${c}</div>`).join("");
         feed.innerHTML += `
-          <div class="post-card">
+          <div class="post-card lift">
             <div class="post-meta">
               <div class="avatar"></div>
               <div><strong>${p.user}</strong><br><span class="muted" style="font-size:.9rem">${p.time}</span></div>
@@ -119,12 +135,7 @@
       const text = textarea.value.trim();
       const img = imageUrl.value.trim();
       if (!text) return;
-      posts.unshift({
-        user:"Demo User",
-        text, imageUrl:img,
-        time:new Date().toLocaleString(),
-        likes:0, comments:[]
-      });
+      posts.unshift({ user:"Demo User", text, imageUrl:img, time:new Date().toLocaleString(), likes:0, comments:[] });
       localStorage.setItem("pp_posts", JSON.stringify(posts));
       textarea.value=""; imageUrl.value="";
       renderFeed();
@@ -136,32 +147,22 @@
       renderFeed();
     });
 
-    window.likePost = i => {
-      posts[i].likes++;
-      localStorage.setItem("pp_posts", JSON.stringify(posts));
-      renderFeed();
-    };
-
+    window.likePost = i => { posts[i].likes++; localStorage.setItem("pp_posts", JSON.stringify(posts)); renderFeed(); };
     window.toggleComment = i => {
       const box = document.getElementById("comments-"+i);
       box.style.display = box.style.display === "none" ? "block" : "none";
     };
-
     window.addComment = i => {
       const input = document.getElementById("comment-input-"+i);
       const val = input.value.trim();
       if(!val) return;
-      posts[i].comments = posts[i].comments || [];
       posts[i].comments.push(val);
       localStorage.setItem("pp_posts", JSON.stringify(posts));
       input.value="";
       renderFeed();
-      toggleComment(i); // keep it open
+      toggleComment(i);
     };
-
-    window.sharePost = i => {
-      alert("Shared post "+(i+1));
-    };
+    window.sharePost = i => alert("Shared post "+(i+1));
 
     renderFeed();
   </script>
