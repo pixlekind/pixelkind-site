@@ -4,28 +4,46 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About — Pups & Parks™</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Fonts & Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/css/styles.css" />
+
+  <!-- SEO & Metadata -->
+  <meta name="description" content="Learn more about Pups & Parks™ — the community-first dog walking platform built on trust, fairness, and freedom." />
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png" />
 </head>
 <body>
+  <!-- Header -->
   <header class="site-header">
-    <a class="logo" href="index.html">
-      <img src="./assets/img/logo.svg" alt="Pups & Parks logo" />
-      <span>Pups & Parks™</span>
-    </a>
-    <nav aria-label="Primary" class="nav">
-      <a href="index.html">Home</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="feed.html">Community Feed</a>
-      <a href="about.html" class="active">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <div class="container header-inner">
+      <a class="logo" href="index.html" aria-label="Pups & Parks home">
+        <img src="./assets/img/logo.svg" alt="Pups & Parks logo" width="32" height="32" loading="lazy" />
+        <span class="brand-text">Pups & Parks™</span>
+      </a>
+
+      <nav aria-label="Primary navigation" class="nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="feed.html">Community Feed</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main class="container">
-    <section class="card">
-      <h1>Community‑first dog walking</h1>
-      <p>Pups & Parks™ was built to make dog walking simple, safe, and fair. Owners get an ad‑free place to discover parks and book trusted walkers. Walkers pay a simple flat fee and keep 100% of their earnings.</p>
+  <!-- Main Content -->
+  <main class="container page-content">
+    <section class="card lift about-section">
+      <h1>Community-first dog walking</h1>
+      <p>
+        Pups & Parks™ was built to make dog walking simple, safe, and fair.
+        Owners get an ad-free place to discover parks and book trusted walkers.
+        Walkers pay a simple flat fee and keep 100% of their earnings.
+      </p>
+
       <h2>What we believe</h2>
       <ul class="bullets">
         <li>Trust and transparency over gimmicks</li>
@@ -35,22 +53,30 @@
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
-    <div class="footer-inner container">
+    <div class="container footer-inner">
       <div class="footer-brand">
-        <img src="./assets/img/logo.svg" alt="Pups & Parks logo small" />
+        <img src="./assets/img/logo.svg" alt="Pups & Parks small logo" width="28" height="28" loading="lazy" />
         <span>Pups & Parks™</span>
       </div>
-      <nav aria-label="Footer" class="footer-nav">
-        <a href="about.html" class="active">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="feed.html">Community</a>
+
+      <nav aria-label="Footer navigation" class="footer-nav">
+        <ul>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="feed.html">Community</a></li>
+        </ul>
       </nav>
     </div>
-    <p class="legal">© 2025 Pups & Parks™ — Built for trust, freedom, and community.</p>
+
+    <p class="legal">
+      © 2025 Pups & Parks™ — Built for trust, freedom, and community.
+    </p>
   </footer>
 
-  <script src="./assets/js/main.js"></script>
+  <!-- Scripts -->
+  <script src="./assets/js/main.js" defer></script>
 </body>
 </html>
