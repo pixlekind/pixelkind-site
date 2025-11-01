@@ -1,13 +1,26 @@
 /* ======================================================
-   Walker Dashboard v2 — Pups & Parks™
+   Pups & Parks™ — Unified CSS
    ====================================================== */
 
-/* === Variables === */
+/* === Layout Variables === */
 :root {
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.5rem;
+  --s6: 2rem;
+  --s7: 3rem;
+  --s8: 4rem;
+
+  --radius-sm: 12px;
+  --radius: 16px;
+  --radius-lg: 1rem;
+  --container: 1200px;
+
   --primary: #2563EB;
   --primary-900: #1E3A8A;
   --accent: #22C55E;
   --accent-700: #15803D;
+
   --bg: #0B1220;
   --bg-soft: #0F172A;
   --surface: #111827;
@@ -17,12 +30,13 @@
   --border: #233047;
   --glass: rgba(255,255,255,0.06);
   --shadow: 0 12px 32px rgba(2,6,23,0.35);
-  --radius: 16px;
-  --radius-sm: 12px;
-  --container: 1200px;
+
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.25);
+  --text-muted: rgba(255,255,255,0.75);
 }
 
-/* Light theme */
+/* === Light Theme === */
 [data-theme="light"] {
   --bg: #F8FAFC;
   --bg-soft: #EEF2FF;
@@ -85,7 +99,7 @@ header {
 }
 
 /* ======================================================
-   Layout
+   Layout Grid
    ====================================================== */
 .container { max-width: var(--container); margin: 0 auto; padding: 1rem; }
 .grid { display: grid; grid-template-columns: 300px 1fr; gap: 1rem; }
@@ -143,9 +157,7 @@ header {
 .card h2 { margin: 0.2rem 0 1rem; font-weight: 800; }
 .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 1rem; margin-bottom: 1rem; }
 
-/* ======================================================
-   Inputs & Forms
-   ====================================================== */
+/* Inputs & Forms */
 label { font-weight: 700; display: block; margin: 0.35rem 0 0.25rem; }
 input, select, textarea {
   width: 100%;
@@ -160,9 +172,7 @@ input, select, textarea {
 textarea { min-height: 110px; resize: vertical; }
 input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); }
 
-/* ======================================================
-   Buttons
-   ====================================================== */
+/* Buttons */
 .btn { border: none; border-radius: 12px; padding: 0.7rem 1rem; font-weight: 800; cursor: pointer; transition: all 0.2s ease; }
 .btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent-700); }
@@ -171,29 +181,21 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); }
 .btn-pill { border-radius: 999px; padding: 0.75rem 1.5rem; font-weight: 600; transition: all 0.2s ease; display: inline-block; }
 .btn-pill:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
 
-/* ======================================================
-   Lists
-   ====================================================== */
+/* Lists */
 .list { display: grid; gap: 0.6rem; }
 .list-item { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; border: 1px solid var(--border); border-radius: 12px; padding: 0.6rem 0.8rem; background: var(--surface-2); }
 .list-item button { cursor: pointer; }
 
-/* ======================================================
-   Media
-   ====================================================== */
+/* Media Grid */
 .media-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 0.6rem; }
 .media-box { border: 1px dashed var(--border); border-radius: 12px; height: 110px; display: grid; place-items: center; color: var(--muted); background: var(--surface-2); text-align: center; }
 
-/* ======================================================
-   Calendar / Schedule
-   ====================================================== */
+/* Calendar */
 .calendar { display: grid; grid-template-columns: repeat(7,1fr); gap: 0.35rem; }
 .day { border: 1px solid var(--border); border-radius: 10px; padding: 0.55rem; text-align: center; cursor: pointer; background: var(--surface-2); transition: all 0.2s ease; }
 .day.active { background: #DBEAFE; border-color: #93C5FD; color: #0F172A; }
 
-/* ======================================================
-   Banner
-   ====================================================== */
+/* Banner */
 .banner {
   display: flex;
   align-items: center;
@@ -206,14 +208,108 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); }
   padding: 0.6rem 0.8rem;
 }
 
-/* ======================================================
-   Footer
-   ====================================================== */
+/* Footer */
 .footer { margin-top: 0.5rem; text-align: center; color: #93C5FD; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem; }
+
+/* ======================================================
+   Hero Section
+   ====================================================== */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s7);
+  align-items: center;
+  padding: var(--s8) var(--s4);
+}
+.hero-media { position: relative; }
+.hero-media img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  object-fit: cover;
+}
+.hero-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  font-size: 0.9rem;
+  animation: fadeInUp 0.6s ease both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Feature Cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--s6);
+  margin-top: var(--s5);
+}
+.feature-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--s5);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Typography */
+.h1, .h2, .h3 { letter-spacing: -0.02em; }
+.sub { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; }
+
+/* Community Feed */
+.stories { display: flex; gap: 1rem; overflow-x: auto; padding: var(--s3) 0; scrollbar-width: none; }
+.stories::-webkit-scrollbar { display: none; }
+.story { flex: 0 0 auto; text-align: center; }
+.story-ring { width: 64px; height: 64px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, var(--primary), var(--accent)); }
+.story-ring img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid #111; }
+
+.composer { display: flex; flex-direction: column; gap: var(--s3); background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s5); box-shadow: var(--shadow-md); }
+.composer textarea, .composer input[type="url"] { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: var(--radius-lg); color: #fff; padding: var(--s4); font-size: 1rem; resize: none; }
+.composer textarea:focus, .composer input:focus { outline: 2px solid var(--primary); }
+
+.feed-list { display: flex; flex-direction: column; gap: var(--s5); }
+.post-card { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--s5); box-shadow: var(--shadow-md); animation: fadeInUp .4s ease both; }
+.post-card p { margin: var(--s3) 0; line-height: 1.5; }
+.post-image { width: 100%; border-radius: var(--radius-lg); margin-top: var(--s3); box-shadow: var(--shadow-md); }
+
+.post-meta { display: flex; align-items: center; gap: var(--s4); }
+.avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--accent)); flex-shrink: 0; }
+
+.post-actions { display: flex; gap: var(--s4); margin-top: var(--s4); flex-wrap: wrap; }
+.pill { background: rgba(255,255,255,0.07); border-radius: 999px; padding: 0.4rem 0.9rem; cursor: pointer; transition: background .2s ease; }
+.pill:hover { background: rgba(255,255,255,0.15); }
+
+.comment-box { margin-top: var(--s4); border-top: 1px solid var(--border); padding-top: var(--s3); }
+.comment { background: rgba(255,255,255,0.07); border-radius: var(--radius-lg); padding: 0.5rem 1rem; margin-top: 0.4rem; font-size: 0.95rem; }
+.comment input { flex: 1; }
+.comment-box input[type="text"] { width: 100%; border: 1px solid var(--border); border-radius: var(--radius-lg); background: rgba(255,255,255,0.05); color: #fff; padding: 0.5rem 1rem; }
+.comment-box input:focus { outline: 2px solid var(--primary); }
+
+.feed-header { margin-bottom: var(--s5); }
 
 /* ======================================================
    Responsive Enhancements
    ====================================================== */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; text-align: center; }
+  .hero-media { order: -1; }
+  .hero-badge { left: 50%; transform: translateX(-50%); bottom: 1rem; }
+}
 @media(max-width: 900px) {
   .grid { grid-template-columns: 1fr; }
   .sidebar { width: 100%; order: -1; }
