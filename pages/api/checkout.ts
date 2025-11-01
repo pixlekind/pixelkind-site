@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       payment_method_types: ["card"],
       line_items: [{ price: priceId, quantity: 1 }],
       success_url: `${req.headers.origin}/walker-dashboard.html?success=true`,
-      cancel_url: `${req.headers.origin}/walker-dashboard.html?canceled=true`,
+      cancel_url: `${req.headers.origin}/pricing.html?canceled=true`,
     });
 
     res.json({ url: session.url });
