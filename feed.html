@@ -1,24 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pups & Parks™ — Community Feed</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- Header -->
   <header class="site-header">
-    <a href="index.html" class="logo">
-      <span class="brand-mark">🐾</span>
-      <span>Pups & Parks™</span>
-    </a>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="feed.html" class="active">Community</a>
-      <a href="profile.html">Profile</a>
-    </nav>
+    <a href="index.html" class="logo"><span class="brand-mark">🐾</span><span>Pups & Parks™</span></a>
+    <nav class="nav"><a href="index.html">Home</a><a href="pricing.html">Pricing</a><a href="feed.html" class="active">Community</a><a href="profile.html">Profile</a></nav>
   </header>
 
   <!-- Banner -->
@@ -31,35 +21,33 @@
     </div>
   </section>
 
-  <!-- Stories Row -->
+  <!-- Stories -->
   <section class="section-tight">
-    <div class="container card" style="display:flex;gap:1rem;overflow-x:auto;padding:1rem;">
-      <div style="text-align:center;">
-        <div style="width:60px;height:60px;border-radius:50%;background:#1E293B;display:flex;align-items:center;justify-content:center;font-size:2rem;">+</div>
-        <p class="muted" style="font-size:0.8rem;">Story</p>
-      </div>
-      <div style="text-align:center;">
-        <img src="https://placekitten.com/80/80" style="width:60px;height:60px;border-radius:50%;object-fit:cover;">
-        <p class="muted" style="font-size:0.8rem;">Olima</p>
-      </div>
-      <div style="text-align:center;">
-        <img src="https://placekitten.com/81/81" style="width:60px;height:60px;border-radius:50%;object-fit:cover;">
-        <p class="muted" style="font-size:0.8rem;">Ivanita</p>
+    <div class="container card">
+      <div class="stories">
+        <div class="story">
+          <div class="story-ring"><img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=200&auto=format&fit=crop" alt="Create story"></div>
+          <p class="muted" style="font-size:.8rem;margin-top:.3rem">Create</p>
+        </div>
+        <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1537151625747-768eb6cf92b6?q=80&w=200&auto=format&fit=crop" alt="Olima"></div><p class="muted" style="font-size:.8rem;margin-top:.3rem">Olima</p></div>
+        <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=200&auto=format&fit=crop" alt="Ivanita"></div><p class="muted" style="font-size:.8rem;margin-top:.3rem">Ivanita</p></div>
+        <div class="story"><div class="story-ring"><img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=200&auto=format&fit=crop" alt="Finn"></div><p class="muted" style="font-size:.8rem;margin-top:.3rem">Finn</p></div>
       </div>
     </div>
   </section>
 
   <!-- Composer + Feed -->
-  <main class="section container">
-    <div class="grid-2">
+  <main class="section">
+    <div class="container grid-2">
       <!-- Composer -->
       <div>
         <div class="card composer">
           <h2 class="h3">Create a post</h2>
+          <label for="composerText" class="muted">Share a thought, park discovery, or pup photo (paste URL)</label>
           <textarea id="composerText" placeholder="What's on your mind?"></textarea>
           <label for="imageUrl" class="mt-2">Image URL (optional)</label>
           <input id="imageUrl" type="url" placeholder="https://...">
-          <div class="composer-actions mt-3">
+          <div class="composer-actions" style="display:flex;gap:.6rem;justify-content:flex-end;margin-top:var(--s3)">
             <button id="postBtn" class="btn btn-primary btn-pill">Post</button>
             <button id="clearBtn" class="btn btn-outline btn-pill">Clear demo data</button>
           </div>
@@ -68,7 +56,7 @@
 
       <!-- Feed -->
       <div>
-        <div class="feed-header center">
+        <div class="feed-header center" style="text-align:center">
           <h2 class="h2">Latest posts</h2>
           <p class="sub">Posts are saved locally and appear instantly.</p>
         </div>
@@ -77,21 +65,15 @@
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-inner container">
       <div class="footer-brand">🐾 Pups & Parks™</div>
-      <nav class="footer-nav">
-        <a href="index.html">Home</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="feed.html">Community</a>
-        <a href="profile.html">Profile</a>
-      </nav>
+      <nav class="footer-nav"><a href="index.html">Home</a><a href="pricing.html">Pricing</a><a href="feed.html">Community</a><a href="profile.html">Profile</a></nav>
     </div>
     <p class="legal">© 2025 Pups & Parks™. All rights reserved.</p>
   </footer>
 
-  <!-- Feed Logic -->
+  <!-- Feed logic -->
   <script>
     const feed = document.getElementById("feed");
     const textarea = document.getElementById("composerText");
@@ -100,39 +82,48 @@
     const clearBtn = document.getElementById("clearBtn");
 
     let posts = JSON.parse(localStorage.getItem("pp_posts")) || [
-      { user:"Emily", text:"Hylands Park loop was perfect at sunset 🌳🐕", time:new Date().toLocaleString(), imageUrl:"", likes:2 },
-      { user:"James", text:"Southchurch Park has shaded paths — great for hot days.", time:new Date().toLocaleString(), imageUrl:"", likes:1 }
+      { user:"Emily", text:"Hylands Park loop was perfect at sunset 🌳🐕", time:new Date().toLocaleString(), imageUrl:"", likes:2, comments:["Beautiful!", "Need to try this!"] },
+      { user:"James", text:"Southchurch Park has shaded paths — great for hot days.", time:new Date().toLocaleString(), imageUrl:"", likes:1, comments:[] }
     ];
 
     function renderFeed() {
       feed.innerHTML = "";
       posts.forEach((p,i) => {
-        const imgHTML = p.imageUrl ? `<img src="${p.imageUrl}" style="width:100%;border-radius:var(--radius-md);margin-top:var(--space-3);">` : "";
+        const imgHTML = p.imageUrl ? `<img class="post-image" src="${p.imageUrl}" alt="Post image">` : "";
+        const commentsHTML = (p.comments||[]).map(c => `<div class="comment">${c}</div>`).join("");
         feed.innerHTML += `
           <div class="post-card">
             <div class="post-meta">
               <div class="avatar"></div>
-              <div><strong>${p.user}</strong><br><span class="sub">${p.time}</span></div>
+              <div><strong>${p.user}</strong><br><span class="muted" style="font-size:.9rem">${p.time}</span></div>
             </div>
             <p>${p.text}</p>
             ${imgHTML}
             <div class="post-actions">
               <span class="pill" onclick="likePost(${i})">👍 Like (${p.likes||0})</span>
-              <span class="pill" onclick="commentPost(${i})">💬 Comment</span>
+              <span class="pill" onclick="toggleComment(${i})">💬 Comment</span>
               <span class="pill" onclick="sharePost(${i})">↗ Share</span>
+            </div>
+            <div id="comments-${i}" class="comment-box" style="display:none">
+              <div id="comments-list-${i}">${commentsHTML || '<div class="muted">No comments yet</div>'}</div>
+              <div style="display:flex;gap:.6rem;margin-top:.6rem">
+                <input id="comment-input-${i}" type="text" placeholder="Write a comment...">
+                <button class="btn btn-secondary btn-pill" onclick="addComment(${i})">Post</button>
+              </div>
             </div>
           </div>`;
       });
     }
 
     postBtn.addEventListener("click", () => {
-      if (!textarea.value.trim()) return;
+      const text = textarea.value.trim();
+      const img = imageUrl.value.trim();
+      if (!text) return;
       posts.unshift({
         user:"Demo User",
-        text:textarea.value.trim(),
-        imageUrl:imageUrl.value.trim(),
+        text, imageUrl:img,
         time:new Date().toLocaleString(),
-        likes:0
+        likes:0, comments:[]
       });
       localStorage.setItem("pp_posts", JSON.stringify(posts));
       textarea.value=""; imageUrl.value="";
@@ -145,9 +136,32 @@
       renderFeed();
     });
 
-    window.likePost = i => { posts[i].likes++; localStorage.setItem("pp_posts", JSON.stringify(posts)); renderFeed(); }
-    window.commentPost = i => alert("Comment clicked on post "+(i+1));
-    window.sharePost = i => alert("Share clicked on post "+(i+1));
+    window.likePost = i => {
+      posts[i].likes++;
+      localStorage.setItem("pp_posts", JSON.stringify(posts));
+      renderFeed();
+    };
+
+    window.toggleComment = i => {
+      const box = document.getElementById("comments-"+i);
+      box.style.display = box.style.display === "none" ? "block" : "none";
+    };
+
+    window.addComment = i => {
+      const input = document.getElementById("comment-input-"+i);
+      const val = input.value.trim();
+      if(!val) return;
+      posts[i].comments = posts[i].comments || [];
+      posts[i].comments.push(val);
+      localStorage.setItem("pp_posts", JSON.stringify(posts));
+      input.value="";
+      renderFeed();
+      toggleComment(i); // keep it open
+    };
+
+    window.sharePost = i => {
+      alert("Shared post "+(i+1));
+    };
 
     renderFeed();
   </script>
