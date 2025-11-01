@@ -1,605 +1,261 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Walker Dashboard (v2) — Pups & Parks™</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --primary:#2563EB; --primary-900:#1E3A8A; --accent:#22C55E; --accent-700:#15803D;
-      --bg:#0B1220; --bg-soft:#0F172A; --surface:#111827; --surface-2:#1F2937;
-      --text:#F8FAFC; --muted:#94A3B8; --border:#233047;
-      --glass: rgba(255,255,255,0.06);
-      --shadow: 0 12px 32px rgba(2,6,23,0.35);
-      --radius: 16px; --radius-sm: 12px; --container: 1200px;
-    }
-    /* Light theme tokens */
-    [data-theme="light"]{
-      --bg:#F8FAFC; --bg-soft:#EEF2FF; --surface:#FFFFFF; --surface-2:#F1F5F9;
-      --text:#0F172A; --muted:#64748B; --border:#E2E8F0; --glass: rgba(2,6,23,0.05);
-      --shadow: 0 12px 28px rgba(2,6,23,0.12);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg); color:var(--text); line-height:1.65;
-    }
-
-    /* Header */
-    header{
-      position:sticky; top:0; z-index:30; backdrop-filter: blur(14px);
-      background: linear-gradient(180deg, rgba(37,99,235,0.12), transparent);
-      border-bottom: 1px solid var(--border);
-    }
-    .hdr-inner{max-width:var(--container); margin:0 auto; padding:.8rem 1rem; display:flex; align-items:center; justify-content:space-between; gap:1rem}
-    .logo{display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--text); font-weight:800}
-    .logo img{width:32px; height:32px}
-    .hdr-actions{display:flex; gap:.5rem; align-items:center}
-    .nav a{color:var(--text); text-decoration:none; font-weight:700; opacity:.9; padding:.4rem .7rem; border-radius:10px}
-    .nav a:hover{opacity:1; background:var(--glass)}
-    .theme-toggle{border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:999px; padding:.4rem .7rem; font-weight:700; cursor:pointer}
-
-    /* Layout */
-    .container{max-width:var(--container); margin:0 auto; padding:1rem}
-    .grid{display:grid; grid-template-columns: 300px 1fr; gap:1rem}
-    @media(max-width:900px){ .grid{grid-template-columns:1fr;} }
-
-    /* Sidebar (glassy) */
-    .sidebar{
-      background: var(--glass); border:1px solid var(--border); border-radius: var(--radius);
-      box-shadow: var(--shadow); padding:1rem;
-    }
-    .profile-mini{display:flex; gap:.8rem; align-items:center; margin-bottom:1rem}
-    .avatar{width:70px; height:70px; border-radius:50%; border:3px solid var(--primary)}
-    .verify{display:inline-flex; align-items:center; gap:.35rem; padding:.25rem .6rem; border-radius:999px; font-weight:700; font-size:.85rem; background:#DCFCE7; color:#166534; border:1px solid #86EFAC}
-    [data-theme="light"] .verify { filter:none }
-    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem}
-    .stat{background:var(--surface-2); border:1px solid var(--border); border-radius:12px; padding:.7rem; text-align:center}
-    .stat h3{margin:.25rem 0; font-size:1.4rem}
-
-    .tabs{margin-top:.8rem; display:grid; gap:.5rem}
-    .tab-pill{
-      display:flex; align-items:center; gap:.5rem; width:100%;
-      border:1px solid var(--border); background:var(--surface);
-      border-radius:12px; padding:.6rem .8rem; cursor:pointer; font-weight:800;
-    }
-    .tab-pill.active{border-color:#93C5FD; box-shadow: inset 0 0 0 2px rgba(147,197,253,.35)}
-    .tab-pill .ico{width:24px; height:24px; display:grid; place-items:center; color:#93C5FD}
-
-    /* Content */
-    .content{display:grid; gap:1rem}
-    .card{
-      background: var(--surface); border:1px solid var(--border); border-radius: var(--radius);
-      box-shadow: var(--shadow); padding:1rem;
-    }
-    .card h2{margin:.2rem 0 1rem; font-weight:800}
-    .row{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem}
-    label{font-weight:700; display:block; margin:.35rem 0 .25rem}
-    input,select,textarea{
-      width:100%; border:1px solid var(--border); border-radius:12px; background:var(--surface-2);
-      color:var(--text); padding:.65rem; font-size:1rem; outline:none;
-    }
-    textarea{min-height:110px; resize:vertical}
-    .muted{color:var(--muted)}
-
-    .btn{border:none; border-radius:12px; padding:.7rem 1rem; font-weight:800; cursor:pointer}
-    .btn-primary{background:var(--accent); color:#fff}
-    .btn-primary:hover{background:var(--accent-700)}
-    .btn-secondary{background:transparent; border:2px solid var(--primary); color:var(--primary)}
-    .btn-secondary:hover{background:rgba(37,99,235,.12)}
-    .pill{border:1px solid var(--border); border-radius:999px; padding:.3rem .7rem; font-weight:700; background:var(--surface-2); color:var(--text); cursor:pointer}
-
-    .list{display:grid; gap:.6rem}
-    .list-item{display:flex; justify-content:space-between; align-items:center; gap:.6rem; border:1px solid var(--border); border-radius:12px; padding:.6rem .8rem; background:var(--surface-2)}
-
-    .calendar{display:grid; grid-template-columns:repeat(7,1fr); gap:.35rem}
-    .day{border:1px solid var(--border); border-radius:10px; padding:.55rem; text-align:center; cursor:pointer; background:var(--surface-2)}
-    .day.active{background:#DBEAFE; border-color:#93C5FD; color:#0F172A}
-
-    .media-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:.6rem}
-    .media-box{border:1px dashed var(--border); border-radius:12px; height:110px; display:grid; place-items:center; color:var(--muted); background:var(--surface-2)}
-
-    .banner{
-      display:flex; align-items:center; justify-content:space-between; gap:.8rem;
-      border:1px solid #93C5FD; background:#DBEAFE; color:#0F172A; border-radius:12px; padding:.6rem .8rem;
-    }
-
-    /* Section headers */
-    .cap{display:flex; align-items:center; gap:.5rem; font-weight:800; color:#93C5FD; letter-spacing:.3px; text-transform:uppercase; font-size:.8rem; margin:.2rem 0 .6rem}
-    .cap .bar{height:2px; flex:1; background:linear-gradient(90deg,#93C5FD, transparent)}
-
-    /* Footer */
-    .footer{margin-top:.5rem; text-align:center; color:#93C5FD; background: var(--surface); border:1px solid var(--border); border-radius:12px; padding:.8rem}
-
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Walker Dashboard — Pups & Parks™</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="hdr-inner">
-      <a class="logo" href="index.html">
-        <img src="./assets/img/logo.svg" alt="Pups & Parks logo">
-        <span>Pups & Parks™</span>
-      </a>
-      <div class="hdr-actions">
-        <nav class="nav">
-          <a href="index.html">Home</a>
-          <a href="pricing.html">Pricing</a>
-          <a href="feed.html">Community</a>
-          <a href="profile.html">Profile</a>
-          <a href="workers-dashboard-v2.html" style="background:var(--glass)">Works Dashboard</a>
-        </nav>
-        <button class="theme-toggle" id="themeToggle">Toggle theme</button>
+<!-- Header -->
+<header>
+  <div class="hdr-inner">
+    <a class="logo" href="index.html">
+      <img src="./assets/img/logo.svg" alt="Pups & Parks logo">
+      <span>Pups & Parks™</span>
+    </a>
+    <div class="hdr-actions">
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="feed.html">Community</a>
+        <a href="profile.html">Profile</a>
+        <a href="workers-dashboard-v2.html" style="background:var(--glass)">Walker Dashboard</a>
+      </nav>
+      <button class="theme-toggle" id="themeToggle">Toggle theme</button>
+    </div>
+  </div>
+</header>
+
+<main class="container grid">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="profile-mini">
+      <img id="avatarPreview" class="avatar" src="./assets/img/default-avatar.png" alt="Avatar">
+      <div>
+        <div style="font-weight:800" id="namePreview">Your Name</div>
+        <div class="muted" id="rolePreview">Walker • City</div>
+        <div id="verifyBadge" style="margin-top:.35rem; display:none" class="verify">✔ Verified Walker</div>
       </div>
     </div>
-  </header>
 
-  <main class="container grid">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="profile-mini">
-        <img id="avatarPreview" class="avatar" src="./assets/img/default-avatar.png" alt="Avatar">
+    <div class="stats">
+      <div class="stat"><div class="muted">Earnings (30d)</div><h3 id="earnings30">£0</h3></div>
+      <div class="stat"><div class="muted">Bookings</div><h3 id="bookingsCount">0</h3></div>
+      <div class="stat"><div class="muted">Reviews</div><h3 id="reviewsCount">0</h3></div>
+    </div>
+
+    <div class="cap"><span>Dashboard</span><div class="bar"></div></div>
+    <div class="tabs">
+      <button class="tab-pill active" data-tab="profile"><span class="ico">👤</span><span>Profile</span></button>
+      <button class="tab-pill" data-tab="services"><span class="ico">🦮</span><span>Services</span></button>
+      <button class="tab-pill" data-tab="schedule"><span class="ico">🗓️</span><span>Schedule</span></button>
+      <button class="tab-pill" data-tab="earnings"><span class="ico">💷</span><span>Earnings</span></button>
+      <button class="tab-pill" data-tab="media"><span class="ico">📸</span><span>Media</span></button>
+      <button class="tab-pill" data-tab="connections"><span class="ico">🤝</span><span>Connections</span></button>
+      <button class="tab-pill" data-tab="settings"><span class="ico">⚙️</span><span>Settings</span></button>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <section class="content">
+    <!-- Trial banner -->
+    <div class="banner" id="trialBanner" hidden>
+      <div><strong>Free trial</strong> — <span id="trialCountdown">7 days left</span></div>
+      <button class="btn btn-secondary" id="upgradeBtn">Upgrade</button>
+    </div>
+
+    <!-- Profile -->
+    <div class="card" id="tab-profile">
+      <h2>Profile</h2>
+      <div class="row">
         <div>
-          <div style="font-weight:800" id="namePreview">Your Name</div>
-          <div class="muted" id="rolePreview">Walker • City</div>
-          <div id="verifyBadge" style="margin-top:.35rem; display:none" class="verify">✔ Verified Walker</div>
+          <label for="fullName">Full name</label>
+          <input id="fullName" placeholder="Jane Doe">
+        </div>
+        <div>
+          <label for="handle">Handle</label>
+          <input id="handle" placeholder="@janedoe">
+        </div>
+        <div>
+          <label for="city">City</label>
+          <input id="city" placeholder="London, UK">
+        </div>
+        <div>
+          <label for="role">Role</label>
+          <select id="role">
+            <option>Walker</option>
+            <option>Owner</option>
+            <option>Walker & Owner</option>
+          </select>
         </div>
       </div>
-
-      <div class="stats">
-        <div class="stat"><div class="muted">Earnings (30d)</div><h3 id="earnings30">£0</h3></div>
-        <div class="stat"><div class="muted">Bookings</div><h3 id="bookingsCount">0</h3></div>
-        <div class="stat"><div class="muted">Reviews</div><h3 id="reviewsCount">0</h3></div>
-      </div>
-
-      <div class="cap"><span>Dashboard</span><div class="bar"></div></div>
-      <div class="tabs">
-        <button class="tab-pill active" data-tab="profile"><span class="ico">👤</span><span>Profile</span></button>
-        <button class="tab-pill" data-tab="services"><span class="ico">🦮</span><span>Services</span></button>
-        <button class="tab-pill" data-tab="schedule"><span class="ico">🗓️</span><span>Schedule</span></button>
-        <button class="tab-pill" data-tab="earnings"><span class="ico">💷</span><span>Earnings</span></button>
-        <button class="tab-pill" data-tab="media"><span class="ico">📸</span><span>Media</span></button>
-        <button class="tab-pill" data-tab="connections"><span class="ico">🤝</span><span>Connections</span></button>
-        <button class="tab-pill" data-tab="settings"><span class="ico">⚙️</span><span>Settings</span></button>
-      </div>
-    </aside>
-
-    <!-- Content -->
-    <section class="content">
-      <!-- Trial banner -->
-      <div class="banner" id="trialBanner" hidden>
-        <div><strong>Free trial</strong> — <span id="trialCountdown">7 days left</span></div>
-        <button class="btn btn-secondary" id="upgradeBtn">Upgrade</button>
-      </div>
-
-      <!-- Profile -->
-      <div class="card" id="tab-profile">
-        <h2>Profile</h2>
-        <div class="row">
-          <div>
-            <label for="fullName">Full name</label>
-            <input id="fullName" placeholder="Jane Doe">
-          </div>
-          <div>
-            <label for="handle">Handle</label>
-            <input id="handle" placeholder="@janedoe">
-          </div>
-          <div>
-            <label for="city">City</label>
-            <input id="city" placeholder="London, UK">
-          </div>
-          <div>
-            <label for="role">Role</label>
-            <select id="role">
-              <option>Walker</option>
-              <option>Owner</option>
-              <option>Walker & Owner</option>
-            </select>
-          </div>
+      <label for="bio">Bio</label>
+      <textarea id="bio" placeholder="Dog lover with 5+ years experience..."></textarea>
+      <div class="row">
+        <div>
+          <label for="avatarUrl">Avatar URL</label>
+          <input id="avatarUrl" placeholder="https://.../avatar.png">
         </div>
-        <label for="bio">Bio</label>
-        <textarea id="bio" placeholder="Dog lover with 5+ years experience..."></textarea>
-        <div class="row">
-          <div>
-            <label for="avatarUrl">Avatar URL</label>
-            <input id="avatarUrl" placeholder="https://.../avatar.png">
-          </div>
-          <div>
-            <label for="verify">Verification</label>
-            <select id="verify">
-              <option value="false">Not verified</option>
-              <option value="true">✔ Verified Walker</option>
-            </select>
-          </div>
-        </div>
-        <div style="margin-top:.6rem;display:flex;gap:.5rem">
-          <button class="btn btn-primary" id="saveProfile">Save profile</button>
-          <button class="btn" id="resetProfile">Reset</button>
+        <div>
+          <label for="verify">Verification</label>
+          <select id="verify">
+            <option value="false">Not verified</option>
+            <option value="true">✔ Verified Walker</option>
+          </select>
         </div>
       </div>
-
-      <!-- Services -->
-      <div class="card" id="tab-services" hidden>
-        <h2>Services</h2>
-        <div class="row">
-          <div>
-            <label>Service name</label>
-            <input id="svcName" placeholder="30‑min Walk">
-          </div>
-          <div>
-            <label>Price (£)</label>
-            <input id="svcPrice" type="number" min="0" step="1" placeholder="15">
-          </div>
-          <div>
-            <label>Duration (min)</label>
-            <input id="svcDuration" type="number" min="15" step="15" placeholder="30">
-          </div>
-        </div>
-        <label>Description</label>
-        <textarea id="svcDesc" placeholder="Calm, paced walk tailored to your pup"></textarea>
-        <div style="margin-top:.6rem;display:flex;gap:.5rem">
-          <button class="btn btn-primary" id="addService">Add service</button>
-          <button class="btn" id="clearServices">Clear</button>
-        </div>
-        <div class="list" id="servicesList" style="margin-top:.8rem"></div>
+      <div style="margin-top:.6rem;display:flex;gap:.5rem">
+        <button class="btn btn-primary" id="saveProfile">Save profile</button>
+        <button class="btn" id="resetProfile">Reset</button>
       </div>
+    </div>
 
-      <!-- Schedule -->
-      <div class="card" id="tab-schedule" hidden>
-        <h2>Schedule & availability</h2>
-        <div class="row">
-          <div>
-            <label>Available days</label>
-            <div class="calendar" id="daysGrid">
-              <div class="day" data-day="Mon">Mon</div>
-              <div class="day" data-day="Tue">Tue</div>
-              <div class="day" data-day="Wed">Wed</div>
-              <div class="day" data-day="Thu">Thu</div>
-              <div class="day" data-day="Fri">Fri</div>
-              <div class="day" data-day="Sat">Sat</div>
-              <div class="day" data-day="Sun">Sun</div>
+    <!-- Services -->
+    <div class="card" id="tab-services" hidden>
+      <h2>Services</h2>
+      <div class="row">
+        <div>
+          <label>Service name</label>
+          <input id="svcName" placeholder="30‑min Walk">
+        </div>
+        <div>
+          <label>Price (£)</label>
+          <input id="svcPrice" type="number" min="0" step="1" placeholder="15">
+        </div>
+        <div>
+          <label>Duration (min)</label>
+          <input id="svcDuration" type="number" min="15" step="15" placeholder="30">
+        </div>
+      </div>
+      <label>Description</label>
+      <textarea id="svcDesc" placeholder="Calm, paced walk tailored to your pup"></textarea>
+      <div style="margin-top:.6rem;display:flex;gap:.5rem">
+        <button class="btn btn-primary" id="addService">Add service</button>
+        <button class="btn" id="clearServices">Clear</button>
+      </div>
+      <div class="list" id="servicesList" style="margin-top:.8rem"></div>
+    </div>
+
+    <!-- Schedule -->
+    <div class="card" id="tab-schedule" hidden>
+      <h2>Schedule & availability</h2>
+      <div class="row">
+        <div>
+          <label>Available days</label>
+          <div class="calendar" id="daysGrid">
+            <div class="day" data-day="Mon">Mon</div>
+            <div class="day" data-day="Tue">Tue</div>
+            <div class="day" data-day="Wed">Wed</div>
+            <div class="day" data-day="Thu">Thu</div>
+            <div class="day" data-day="Fri">Fri</div>
+            <div class="day" data-day="Sat">Sat</div>
+            <div class="day" data-day="Sun">Sun</div>
+          </div>
+        </div>
+        <div>
+          <label>Time window</label>
+          <div class="row">
+            <div>
+              <label for="startTime">Start</label>
+              <input id="startTime" type="time" value="09:00">
             </div>
-          </div>
-          <div>
-            <label>Time window</label>
-            <div class="row">
-              <div>
-                <label for="startTime">Start</label>
-                <input id="startTime" type="time" value="09:00">
-              </div>
-              <div>
-                <label for="endTime">End</label>
-                <input id="endTime" type="time" value="18:00">
-              </div>
+            <div>
+              <label for="endTime">End</label>
+              <input id="endTime" type="time" value="18:00">
             </div>
           </div>
         </div>
-        <div style="margin-top:.6rem;display:flex;gap:.5rem">
-          <button class="btn btn-primary" id="saveSchedule">Save availability</button>
-          <button class="btn" id="clearSchedule">Clear</button>
-        </div>
-        <p class="muted" id="scheduleStatus" style="margin-top:.5rem"></p>
       </div>
+      <div style="margin-top:.6rem;display:flex;gap:.5rem">
+        <button class="btn btn-primary" id="saveSchedule">Save availability</button>
+        <button class="btn" id="clearSchedule">Clear</button>
+      </div>
+      <p class="muted" id="scheduleStatus" style="margin-top:.5rem"></p>
+    </div>
 
-      <!-- Earnings -->
-      <div class="card" id="tab-earnings" hidden>
-        <h2>Earnings</h2>
-        <div class="row">
-          <div class="card" style="background:var(--surface-2)">
-            <div class="muted">This month</div><h3 id="earningsMonth">£0</h3>
-          </div>
-          <div class="card" style="background:var(--surface-2)">
-            <div class="muted">Last month</div><h3 id="earningsLast">£0</h3>
-          </div>
-          <div class="card" style="background:var(--surface-2)">
-            <div class="muted">Total</div><h3 id="earningsTotal">£0</h3>
-          </div>
+    <!-- Earnings -->
+    <div class="card" id="tab-earnings" hidden>
+      <h2>Earnings</h2>
+      <div class="row">
+        <div class="card" style="background:var(--surface-2)">
+          <div class="muted">This month</div><h3 id="earningsMonth">£0</h3>
         </div>
-        <div class="row" style="margin-top:.8rem">
-          <div>
-            <label>Log booking (£)</label>
-            <input id="earnAmount" type="number" min="0" step="1" placeholder="25">
-            <button class="btn btn-primary" id="addEarning" style="margin-top:.5rem">Add</button>
-          </div>
-          <div class="list" id="earningsList"></div>
+        <div class="card" style="background:var(--surface-2)">
+          <div class="muted">Last month</div><h3 id="earningsLast">£0</h3>
+        </div>
+        <div class="card" style="background:var(--surface-2)">
+          <div class="muted">Total</div><h3 id="earningsTotal">£0</h3>
         </div>
       </div>
-
-      <!-- Media -->
-      <div class="card" id="tab-media" hidden>
-        <h2>Media</h2>
-        <div class="row">
-          <div>
-            <label>Image/video URL</label>
-            <input id="mediaUrl" placeholder="https://...">
-            <button class="btn btn-primary" id="addMedia" style="margin-top:.5rem">Add</button>
-          </div>
+      <div class="row" style="margin-top:.8rem">
+        <div>
+          <label>Log booking (£)</label>
+          <input id="earnAmount" type="number" min="0" step="1" placeholder="25">
+          <button class="btn btn-primary" id="addEarning" style="margin-top:.5rem">Add</button>
         </div>
-        <div class="media-grid" id="mediaGrid" style="margin-top:.8rem"></div>
+        <div class="list" id="earningsList"></div>
       </div>
+    </div>
 
-      <!-- Connections -->
-      <div class="card" id="tab-connections" hidden>
-        <h2>Connections</h2>
-        <div class="row">
-          <div>
-            <label>Search handle</label>
-            <input id="connHandle" placeholder="@alexsmith">
-            <button class="btn btn-primary" id="addConnection" style="margin-top:.5rem">Follow</button>
-          </div>
-          <div class="list" id="connectionsList"></div>
+    <!-- Media -->
+    <div class="card" id="tab-media" hidden>
+      <h2>Media</h2>
+      <div class="row">
+        <div>
+          <label>Image/video URL</label>
+          <input id="mediaUrl" placeholder="https://...">
+          <button class="btn btn-primary" id="addMedia" style="margin-top:.5rem">Add</button>
         </div>
       </div>
+      <div class="media-grid" id="mediaGrid" style="margin-top:.8rem"></div>
+    </div>
 
-      <!-- Settings -->
-      <div class="card" id="tab-settings" hidden>
-        <h2>Settings</h2>
-        <div class="row">
-          <div>
-            <label>Notifications</label>
-            <select id="notify">
-              <option value="all">All activity</option>
-              <option value="bookings">Bookings only</option>
-              <option value="none">Mute</option>
-            </select>
-          </div>
-          <div>
-            <label>Public profile</label>
-            <select id="visibility">
-              <option value="public">Public</option>
-              <option value="private">Private</option>
-            </select>
-          </div>
+    <!-- Connections -->
+    <div class="card" id="tab-connections" hidden>
+      <h2>Connections</h2>
+      <div class="row">
+        <div>
+          <label>Search handle</label>
+          <input id="connHandle" placeholder="@alexsmith">
+          <button class="btn btn-primary" id="addConnection" style="margin-top:.5rem">Follow</button>
         </div>
-        <div style="margin-top:.6rem;display:flex;gap:.5rem">
-          <button class="btn btn-primary" id="saveSettings">Save settings</button>
-          <button class="btn" id="resetAll">Reset all data</button>
-        </div>
-        <p class="muted" id="settingsStatus" style="margin-top:.5rem"></p>
+        <div class="list" id="connectionsList"></div>
       </div>
+    </div>
 
-      <div class="footer">© 2025 Pups & Parks™ — Walker dashboard v2</div>
-    </section>
-  </main>
+    <!-- Settings -->
+    <div class="card" id="tab-settings" hidden>
+      <h2>Settings</h2>
+      <div class="row">
+        <div>
+          <label>Notifications</label>
+          <select id="notify">
+            <option value="all">All activity</option>
+            <option value="bookings">Bookings only</option>
+            <option value="none">Mute</option>
+          </select>
+        </div>
+        <div>
+          <label>Public profile</label>
+          <select id="visibility">
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:.6rem;display:flex;gap:.5rem">
+        <button class="btn btn-primary" id="saveSettings">Save settings</button>
+        <button class="btn" id="resetAll">Reset all data</button>
+      </div>
+      <p class="muted" id="settingsStatus" style="margin-top:.5rem"></p>
+    </div>
 
-  <script>
-    // Theme toggle
-    const tBtn=document.getElementById('themeToggle');
-    const root=document.documentElement;
-    const storedTheme=localStorage.getItem('pp_theme')||'light';
-    document.documentElement.setAttribute('data-theme', storedTheme);
-    tBtn.addEventListener('click',()=>{
-      const cur=root.getAttribute('data-theme');
-      const next= cur==='light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('pp_theme', next);
-    });
+    <div class="footer">© 2025 Pups & Parks™ — Walker dashboard v2</div>
+  </section>
+</main>
 
-    // Storage helpers
-    const S = {
-      get: (k, fallback) => { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? fallback; } catch { return fallback; } },
-      set: (k, v) => localStorage.setItem(k, JSON.stringify(v))
-    };
-
-    // Tabs
-    const tabs = ['profile','services','schedule','earnings','media','connections','settings'];
-    document.querySelectorAll('.tab-pill').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        document.querySelectorAll('.tab-pill').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        const t = btn.getAttribute('data-tab');
-        tabs.forEach(id=>{
-          document.getElementById('tab-'+id).hidden = (id!==t);
-        });
-      });
-    });
-
-    // Trial banner demo
-    (function trialBanner(){
-      const banner = document.getElementById('trialBanner');
-      const countdown = document.getElementById('trialCountdown');
-      const upgrade = document.getElementById('upgradeBtn');
-      let ends = Number(localStorage.getItem('pp_trialEndsAt')||0);
-      const fmt=(ms)=>{const d=Math.max(0,Math.ceil(ms/86400000));return `${d} day${d!==1?'s':''} left`;};
-      const tick=()=>{const left=ends-Date.now(); if(left>0){banner.hidden=false; countdown.textContent=fmt(left);} else banner.hidden=true;};
-      if(!ends){ ends = Date.now() + 7*86400000; localStorage.setItem('pp_trialEndsAt', String(ends)); }
-      tick(); setInterval(tick, 60*60*1000);
-      upgrade.addEventListener('click',()=>alert('Upgrade flow coming soon.'));
-    })();
-
-    // Profile
-    (function profile(){
-      const data = S.get('pp_profile', {
-        fullName: 'Your Name', handle: '@handle', city: 'Your City',
-        role: 'Walker', bio: '', avatarUrl: './assets/img/default-avatar.png', verify: false
-      });
-      // Inputs
-      ['fullName','handle','city','role','bio','avatarUrl'].forEach(id=>{
-        const el=document.getElementById(id); if(el) el.value = data[id] ?? '';
-      });
-      document.getElementById('verify').value = String(data.verify);
-      // Preview
-      const namePrev=document.getElementById('namePreview');
-      const rolePrev=document.getElementById('rolePreview');
-      const avatarPrev=document.getElementById('avatarPreview');
-      const verifyBadge=document.getElementById('verifyBadge');
-      const syncPreview=()=>{ 
-        namePrev.textContent = data.fullName || 'Your Name';
-        rolePrev.textContent = `${data.role} • ${data.city||'City'}`;
-        avatarPrev.src = data.avatarUrl || './assets/img/default-avatar.png';
-        verifyBadge.style.display = data.verify ? 'inline-flex' : 'none';
-      };
-      syncPreview();
-      // Save / reset
-      document.getElementById('saveProfile').addEventListener('click',()=>{
-        data.fullName=document.getElementById('fullName').value.trim();
-        data.handle=document.getElementById('handle').value.trim();
-        data.city=document.getElementById('city').value.trim();
-        data.role=document.getElementById('role').value;
-        data.bio=document.getElementById('bio').value.trim();
-        data.avatarUrl=document.getElementById('avatarUrl').value.trim();
-        data.verify=document.getElementById('verify').value==='true';
-        S.set('pp_profile', data); syncPreview(); alert('Profile saved.');
-      });
-      document.getElementById('resetProfile').addEventListener('click',()=>{
-        localStorage.removeItem('pp_profile'); location.reload();
-      });
-    })();
-
-    // Services
-    (function services(){
-      const listEl=document.getElementById('servicesList');
-      const render=()=>{
-        const list=S.get('pp_services',[]);
-        listEl.innerHTML='';
-        list.forEach((svc,i)=>{
-          const row=document.createElement('div'); row.className='list-item';
-          row.innerHTML=`<div><strong>${svc.name}</strong> — £${svc.price} • ${svc.duration} min<br><span class="muted">${svc.desc||''}</span></div><button class="pill" data-i="${i}">Remove</button>`;
-          row.querySelector('button').addEventListener('click',()=>{
-            const cur=S.get('pp_services',[]); cur.splice(i,1); S.set('pp_services',cur); render();
-          });
-          listEl.appendChild(row);
-        });
-      };
-      render();
-      document.getElementById('addService').addEventListener('click',()=>{
-        const name=document.getElementById('svcName').value.trim();
-        const price=parseFloat(document.getElementById('svcPrice').value||'0');
-        const duration=parseInt(document.getElementById('svcDuration').value||'0',10);
-        const desc=document.getElementById('svcDesc').value.trim();
-        if(!name || price<=0 || duration<=0){ alert('Please fill service name, price, duration.'); return; }
-        const cur=S.get('pp_services',[]); cur.push({name,price,duration,desc}); S.set('pp_services',cur);
-        ['svcName','svcPrice','svcDuration','svcDesc'].forEach(id=>document.getElementById(id).value='');
-        render();
-      });
-      document.getElementById('clearServices').addEventListener('click',()=>{ localStorage.removeItem('pp_services'); render(); });
-    })();
-
-    // Schedule
-    (function schedule(){
-      const daysEl=document.getElementById('daysGrid');
-      const status=document.getElementById('scheduleStatus');
-      const data=S.get('pp_schedule',{days:[],start:'09:00',end:'18:00'});
-      daysEl.querySelectorAll('.day').forEach(d=>{
-        if(data.days.includes(d.dataset.day)) d.classList.add('active');
-        d.addEventListener('click',()=>{
-          const k=d.dataset.day;
-          const set=new Set(S.get('pp_schedule',{days:[],start:data.start,end:data.end}).days);
-          if(set.has(k)) set.delete(k); else set.add(k);
-          d.classList.toggle('active');
-          const updated={days:[...set],start:document.getElementById('startTime').value,end:document.getElementById('endTime').value};
-          S.set('pp_schedule',updated);
-        });
-      });
-      document.getElementById('startTime').value=data.start;
-      document.getElementById('endTime').value=data.end;
-      document.getElementById('saveSchedule').addEventListener('click',()=>{
-        const updated={days:[...document.querySelectorAll('.day.active')].map(e=>e.dataset.day),start:document.getElementById('startTime').value,end:document.getElementById('endTime').value};
-        S.set('pp_schedule',updated); status.textContent='Availability saved.'; setTimeout(()=>status.textContent='',2000);
-      });
-      document.getElementById('clearSchedule').addEventListener('click',()=>{ localStorage.removeItem('pp_schedule'); location.reload(); });
-    })();
-
-    // Earnings
-    (function earnings(){
-      const listEl=document.getElementById('earningsList');
-      const monthEl=document.getElementById('earningsMonth');
-      const lastEl=document.getElementById('earningsLast');
-      const totalEl=document.getElementById('earningsTotal');
-      const thirtyEl=document.getElementById('earnings30');
-      const bookingsEl=document.getElementById('bookingsCount');
-      const reviewsEl=document.getElementById('reviewsCount');
-
-      const render=()=>{
-        const items=S.get('pp_earnings',[]);
-        const now=new Date(); const month=now.getMonth(); const year=now.getFullYear();
-        let total=0, curMonth=0, lastMonth=0, lastMonthIdx=(month+11)%12, lastYear= month===0 ? year-1 : year;
-        items.forEach(it=>{ total+=it.amount; const d=new Date(it.ts); if(d.getMonth()===month && d.getFullYear()===year) curMonth+=it.amount;
-          if(d.getMonth()===lastMonthIdx && d.getFullYear()===lastYear) lastMonth+=it.amount; });
-        totalEl.textContent=`£${total}`; monthEl.textContent=`£${curMonth}`; lastEl.textContent=`£${lastMonth}`;
-        const cutoff=Date.now()-30*86400000; const last30=items.filter(i=>i.ts>=cutoff).reduce((s,i)=>s+i.amount,0);
-        thirtyEl.textContent=`£${last30}`;
-        bookingsEl.textContent=items.length;
-        reviewsEl.textContent=S.get('pp_reviews',[]).length;
-        listEl.innerHTML='';
-        items.slice().reverse().forEach((i,idx)=>{
-          const row=document.createElement('div'); row.className='list-item';
-          row.innerHTML=`<div>£${i.amount} — ${new Date(i.ts).toLocaleString()} <span class="muted">${i.note||''}</span></div><button class="pill" data-i="${idx}">Remove</button>`;
-          row.querySelector('button').addEventListener('click',()=>{
-            const cur=S.get('pp_earnings',[]); cur.splice(cur.length-1-idx,1); S.set('pp_earnings',cur); render();
-          });
-          listEl.appendChild(row);
-        });
-      };
-      render();
-      document.getElementById('addEarning').addEventListener('click',()=>{
-        const amt=parseFloat(document.getElementById('earnAmount').value||'0'); if(amt<=0){ alert('Enter a valid amount.'); return; }
-        const cur=S.get('pp_earnings',[]); cur.push({amount:amt,ts:Date.now(),note:'Booking'}); S.set('pp_earnings',cur); document.getElementById('earnAmount').value=''; render();
-      });
-    })();
-
-    // Media
-    (function media(){
-      const grid=document.getElementById('mediaGrid');
-      const render=()=>{
-        const items=S.get('pp_media',[]);
-        grid.innerHTML='';
-        items.forEach((url,i)=>{
-          const box=document.createElement('div'); box.className='media-box';
-          box.innerHTML=`<div style="display:grid;gap:.4rem;place-items:center"><div class="muted">${url.length>18?url.slice(0,18)+'…':url}</div><button class="pill" data-i="${i}">Remove</button></div>`;
-          box.querySelector('button').addEventListener('click',()=>{
-            const cur=S.get('pp_media',[]); cur.splice(i,1); S.set('pp_media',cur); render();
-          });
-          grid.appendChild(box);
-        });
-      };
-      render();
-      document.getElementById('addMedia').addEventListener('click',()=>{
-        const url=document.getElementById('mediaUrl').value.trim(); if(!url){ alert('Add a URL.'); return; }
-        const cur=S.get('pp_media',[]); cur.push(url); S.set('pp_media',cur); document.getElementById('mediaUrl').value=''; render();
-      });
-    })();
-
-    // Connections
-    (function connections(){
-      const list=document.getElementById('connectionsList');
-      const render=()=>{
-        const items=S.get('pp_connections',[]);
-        list.innerHTML='';
-        items.forEach((h,i)=>{
-          const row=document.createElement('div'); row.className='list-item';
-          row.innerHTML=`<div><strong>${h}</strong></div><button class="pill" data-i="${i}">Unfollow</button>`;
-          row.querySelector('button').addEventListener('click',()=>{
-            const cur=S.get('pp_connections',[]); cur.splice(i,1); S.set('pp_connections',cur); render();
-          });
-          list.appendChild(row);
-        });
-      };
-      render();
-      document.getElementById('addConnection').addEventListener('click',()=>{
-        const h=document.getElementById('connHandle').value.trim(); if(!h || !h.startsWith('@')){ alert('Use a handle like @alexsmith'); return; }
-        const cur=S.get('pp_connections',[]); if(cur.includes(h)){ alert('Already following.'); return; }
-        cur.push(h); S.set('pp_connections',cur); document.getElementById('connHandle').value=''; render();
-      });
-    })();
-
-    // Settings
-    (function settings(){
-      const notify=document.getElementById('notify');
-      const vis=document.getElementById('visibility');
-      const status=document.getElementById('settingsStatus');
-      const data=S.get('pp_settings',{notify:'all',visibility:'public'});
-      notify.value=data.notify; vis.value=data.visibility;
-      document.getElementById('saveSettings').addEventListener('click',()=>{
-        S.set('pp_settings',{notify:notify.value,visibility:vis.value}); status.textContent='Settings saved.'; setTimeout(()=>status.textContent='',2000);
-      });
-      document.getElementById('resetAll').addEventListener('click',()=>{
-        if(confirm('Reset all dashboard data?')){ ['pp_profile','pp_services','pp_schedule','pp_earnings','pp_media','pp_connections','pp_settings','pp_reviews','pp_trialEndsAt'].forEach(k=>localStorage.removeItem(k)); location.reload(); }
-      });
-    })();
-  </script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>
