@@ -1,134 +1,59 @@
-<!-- feed.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pups & Parks™ — Community Feed</title>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Community Feed</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <a href="index.html" class="logo">
-      <span class="brand-mark">🐾</span>
-      <span>Pups & Parks™</span>
-    </a>
-    <nav class="nav" aria-label="Main">
-      <a href="index.html">Home</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="feed.html" class="active">Community</a>
-      <a href="profile.html">Profile</a>
-    </nav>
-  </header>
+<header class="site-header">
+  <a href="index.html" class="logo">🐾 Pups & Parks™</a>
+  <nav class="nav">
+    <a href="index.html">Home</a><a href="pricing.html">Pricing</a>
+    <a href="feed.html" class="active">Community</a><a href="profile.html">Profile</a>
+  </nav>
+</header>
 
-  <!-- Banner -->
-  <section class="section-tight">
-    <div class="container">
-      <div class="banner banner-info">
-        <div><strong>Community feed</strong> — share walks, park tips, and pup moments.</div>
-        <div class="muted">Demo mode (localStorage)</div>
-      </div>
+<main class="section container">
+  <!-- Composer -->
+  <div class="card">
+    <div style="display:flex;gap:1rem;align-items:center">
+      <div class="avatar"></div>
+      <input id="composerText" placeholder="What's on your mind?" style="flex:1;padding:.6rem;border-radius:10px;border:none;background:#1E293B;color:#fff">
     </div>
-  </section>
+    <div style="margin-top:.5rem;text-align:right">
+      <button id="postBtn" class="btn btn-primary">Post</button>
+    </div>
+  </div>
 
-  <!-- Composer + Feed -->
-  <main class="section">
-    <div class="container grid-2">
-      <div>
-        <div class="card composer">
-          <h2 class="h3">Create a post</h2>
-          <label for="composerText" class="muted">Share a thought, park discovery, or pup photo (paste URL)</label>
-          <textarea id="composerText" placeholder="Your post..."></textarea>
-          <label for="imageUrl" class="mt-2">Image URL (optional)</label>
-          <input id="imageUrl" type="url" placeholder="https://...">
-          <div class="composer-actions mt-3">
-            <button id="postBtn" class="btn btn-primary btn-pill">Post</button>
-            <button id="clearBtn" class="btn btn-outline btn-pill">Clear demo data</button>
-          </div>
+  <!-- Feed -->
+  <div id="feed" class="feed-list" style="margin-top:1rem"></div>
+</main>
+
+<script>
+let posts = JSON.parse(localStorage.getItem("pp_posts"))||[];
+const feed=document.getElementById("feed"),composer=document.getElementById("composerText"),btn=document.getElementById("postBtn");
+
+function render(){
+  feed.innerHTML="";
+  posts.forEach((p,i)=>{
+    feed.innerHTML+=`
+      <div class="post-card">
+        <div class="post-meta"><div class="avatar"></div><div><strong>${p.user}</strong><br><span class="sub">${p.time}</span></div></div>
+        <p>${p.text}</p>
+        <div class="post-actions">
+          <span class="pill" onclick="likePost(${i})">👍 Like (${p.likes||0})</span>
+          <span class="pill" onclick="commentPost(${i})">💬 Comment</span>
+          <span class="pill" onclick="sharePost(${i})">↗ Share</span>
         </div>
-      </div>
-
-      <div>
-        <div class="feed-header center">
-          <h2 class="h2">Latest posts</h2>
-          <p class="sub">Posts are saved locally and appear instantly.</p>
-        </div>
-        <div id="feed" class="feed-list mt-4"></div>
-      </div>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner container">
-      <div class="footer-brand">🐾 Pups & Parks™</div>
-      <nav class="footer-nav" aria-label="Footer">
-        <a href="index.html">Home</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="feed.html">Community</a>
-        <a href="profile.html">Profile</a>
-      </nav>
-    </div>
-    <p class="legal">© 2025 Pups & Parks™. All rights reserved.</p>
-  </footer>
-
-  <script>
-    const feed = document.getElementById("feed");
-    const textarea = document.getElementById("composerText");
-    const imageUrl = document.getElementById("imageUrl");
-    const postBtn = document.getElementById("postBtn");
-    const clearBtn = document.getElementById("clearBtn");
-
-    let posts = JSON.parse(localStorage.getItem("pp_posts")) || [
-      { username: "Emily", content: "Hylands Park loop was perfect at sunset 🌳🐕", timestamp: new Date().toLocaleString(), imageUrl: "" },
-      { username: "James", content: "Southchurch Park has shaded paths — great for hot days.", timestamp: new Date().toLocaleString(), imageUrl: "" }
-    ];
-
-    function renderFeed() {
-      feed.innerHTML = "";
-      posts.forEach(post => {
-        const imgHTML = post.imageUrl ? `<img src="${post.imageUrl}" alt="Post image" style="width:100%; border-radius: var(--radius-md); margin-top: var(--space-3);">` : "";
-        feed.innerHTML += `
-          <div class="post-card reveal">
-            <div class="post-meta">
-              <span><strong>${post.username}</strong></span>
-              <span>${post.timestamp}</span>
-            </div>
-            <p>${post.content}</p>
-            ${imgHTML}
-            <div class="post-actions">
-              <span class="pill">👍 Like</span>
-              <span class="pill">💬 Comment</span>
-              <span class="pill flag">⚑ Report</span>
-            </div>
-          </div>
-        `;
-      });
-    }
-
-    postBtn.addEventListener("click", () => {
-      const content = textarea.value.trim();
-      const img = imageUrl.value.trim();
-      if (!content) return;
-      const newPost = {
-        username: "Demo User",
-        content,
-        imageUrl: img,
-        timestamp: new Date().toLocaleString()
-      };
-      posts.unshift(newPost);
-      localStorage.setItem("pp_posts", JSON.stringify(posts));
-      textarea.value = "";
-      imageUrl.value = "";
-      renderFeed();
-    });
-
-    clearBtn.addEventListener("click", () => {
-      localStorage.removeItem("pp_posts");
-      posts = [];
-      renderFeed();
-    });
-
-    renderFeed();
-  </script>
-</body>
-</html>
+      </div>`;
+  });
+}
+btn.onclick=()=>{
+  if(!composer.value.trim())return;
+  posts.unshift({user:"Demo User",text:composer.value,time:new Date().toLocaleString(),likes:0});
+  localStorage.setItem("pp_posts",JSON.stringify(posts));
+  composer.value="";render();
+};
+function likePost(i){posts[i].likes=(posts[i].likes||0)+1;localStorage.setItem("pp_posts",JSON.stringify(posts));render();}
+function commentPost(i){alert("Comment clicked on post "+(
