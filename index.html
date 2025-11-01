@@ -1,24 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pups & Parks™ — Walks, Trust & Community</title>
   <link rel="stylesheet" href="css/styles.css" />
-
-  <!-- Modern SEO / PWA meta -->
   <meta name="description" content="Find trusted dog walkers, discover local parks, and join a friendly community for pups and their people." />
   <link rel="icon" type="image/png" href="favicon.png" />
 </head>
 <body>
   <!-- Header -->
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="hdr-inner container">
       <a href="index.html" class="logo" aria-label="Pups & Parks home">
         <span class="brand-mark">🐾</span>
         <span class="brand-text">Pups & Parks™</span>
       </a>
-
       <nav class="nav" aria-label="Main navigation">
         <ul>
           <li><a href="index.html" class="active">Home</a></li>
@@ -27,6 +24,7 @@
           <li><a href="profile.html">Profile</a></li>
         </ul>
       </nav>
+      <button class="theme-toggle">Toggle Theme</button>
     </div>
   </header>
 
@@ -38,24 +36,18 @@
         <p class="sub">
           Find vetted walkers, explore local parks, and join a community built for pups and their people.
         </p>
-
         <div class="hero-actions">
           <a href="pricing.html" class="btn btn-primary btn-pill">Start free trial</a>
           <a href="feed.html" class="btn btn-secondary btn-pill">Join community</a>
         </div>
-
         <div class="banner banner-info">
           <p><strong>Instant payouts</strong> for walkers • <strong>Free booking</strong> for owners</p>
-          <a class="btn btn-outline btn-pill" href="pricing.html">View pricing</a>
+          <a href="pricing.html" class="btn btn-outline btn-pill">View pricing</a>
         </div>
       </div>
 
       <div class="hero-media">
-        <img
-          src="https://images.unsplash.com/photo-1558944351-c64c5b3c1d5f?q=80&w=1400&auto=format&fit=crop"
-          alt="Dog walking in scenic park"
-          loading="lazy"
-        />
+        <img src="https://images.unsplash.com/photo-1558944351-c64c5b3c1d5f?q=80&w=1400&auto=format&fit=crop" alt="Dog walking in scenic park" loading="lazy" />
         <span class="hero-badge">Trusted by 5,000+ owners</span>
       </div>
     </div>
@@ -65,7 +57,7 @@
   <section class="section-tight trust">
     <div class="container">
       <p class="sub">Trusted by dog owners and walkers across the UK</p>
-      <ul class="trust-logos">
+      <ul class="trust-logos list">
         <li>🐶 Kennel Club</li>
         <li>🌍 Local Parks Assoc.</li>
         <li>⭐ 5,000+ Happy Walkers</li>
@@ -83,13 +75,11 @@
           <h3>Trusted walkers</h3>
           <p>Vetted & reviewed for safety and reliability.</p>
         </article>
-
         <article class="feature-card lift">
           <div class="icon">🌳</div>
           <h3>Park discovery</h3>
           <p>Find the best local parks and walking routes.</p>
         </article>
-
         <article class="feature-card lift">
           <div class="icon">🤝</div>
           <h3>Community feed</h3>
@@ -113,7 +103,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="site-footer">
+  <footer class="site-footer footer">
     <div class="container footer-inner">
       <div class="footer-brand">🐾 Pups & Parks™</div>
       <nav class="footer-nav" aria-label="Footer navigation">
