@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <!-- Header -->
   <header class="site-header">
     <a href="index.html" class="logo">
       <span class="brand-mark">🐾</span>
@@ -21,68 +22,79 @@
     </nav>
   </header>
 
-  <section class="section">
-    <div class="container center">
+  <!-- Pricing Hero -->
+  <section class="section center">
+    <div class="container">
       <h1 class="h1">Simple, transparent pricing</h1>
       <p class="sub">Walkers pay a flat monthly fee. Owners book for free.</p>
+    </div>
+  </section>
 
-      <div class="grid-3 mt-6">
-        <div class="card lift">
-          <h3 class="h3">Walker</h3>
-          <p class="sub">For professional dog walkers</p>
-          <p style="font-size:2rem; font-weight:800; margin: var(--space-4) 0;">£25<span style="font-size:1rem; font-weight:600;">/month</span></p>
-          <ul style="list-style:none; padding:0; margin:0 0 var(--space-4); text-align:left; line-height:1.9;">
-            <li>✔ Unlimited bookings</li>
-            <li>✔ Instant payouts</li>
-            <li>✔ Branded dashboard</li>
-            <li>✔ Community access</li>
-          </ul>
-          <a href="#" class="btn btn-primary btn-pill">Start free trial</a>
-        </div>
-
-        <div class="card lift">
-          <h3 class="h3">Owner</h3>
-          <p class="sub">For dog owners booking walks</p>
-          <p style="font-size:2rem; font-weight:800; margin: var(--space-4) 0;">Free</p>
-          <ul style="list-style:none; padding:0; margin:0 0 var(--space-4); text-align:left; line-height:1.9;">
-            <li>✔ Browse trusted walkers</li>
-            <li>✔ Book instantly</li>
-            <li>✔ Park discovery</li>
-            <li>✔ Community access</li>
-          </ul>
-          <a href="feed.html" class="btn btn-secondary btn-pill">Join community</a>
-        </div>
-
-        <div class="card lift">
-          <h3 class="h3">Agency</h3>
-          <p class="sub">For teams managing multiple walkers</p>
-          <p style="font-size:2rem; font-weight:800; margin: var(--space-4) 0;">Custom</p>
-          <ul style="list-style:none; padding:0; margin:0 0 var(--space-4); text-align:left; line-height:1.9;">
-            <li>✔ Multi‑walker management</li>
-            <li>✔ Analytics dashboard</li>
-            <li>✔ Priority support</li>
-            <li>✔ White‑label branding</li>
-          </ul>
-          <a href="mailto:hello@pupsandparks.com" class="btn btn-outline btn-pill">Contact us</a>
-        </div>
+  <!-- Pricing Plans -->
+  <section class="section-tight">
+    <div class="container grid-3">
+      <!-- Walker -->
+      <div class="card lift pricing-card">
+        <h3 class="h3">Walker</h3>
+        <p class="sub">For professional dog walkers</p>
+        <div class="price">£25<span>/month</span></div>
+        <ul class="pricing-list">
+          <li>✔ Unlimited bookings</li>
+          <li>✔ Instant payouts</li>
+          <li>✔ Branded dashboard</li>
+          <li>✔ Community access</li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-pill">Start free trial</a>
       </div>
 
-      <div class="card mt-6">
-        <h3 class="h3">Frequently asked</h3>
-        <div class="grid-2 mt-4">
-          <div>
-            <strong>Do owners pay anything?</strong>
-            <p class="muted">No — booking is free. Walkers pay a simple flat fee.</p>
-          </div>
-          <div>
-            <strong>How do payouts work?</strong>
-            <p class="muted">Walkers receive instant payouts to their chosen account.</p>
-          </div>
+      <!-- Owner -->
+      <div class="card lift pricing-card">
+        <h3 class="h3">Owner</h3>
+        <p class="sub">For dog owners booking walks</p>
+        <div class="price">Free</div>
+        <ul class="pricing-list">
+          <li>✔ Browse trusted walkers</li>
+          <li>✔ Book instantly</li>
+          <li>✔ Park discovery</li>
+          <li>✔ Community access</li>
+        </ul>
+        <a href="feed.html" class="btn btn-secondary btn-pill">Join community</a>
+      </div>
+
+      <!-- Agency -->
+      <div class="card lift pricing-card">
+        <h3 class="h3">Agency</h3>
+        <p class="sub">For teams managing multiple walkers</p>
+        <div class="price">Custom</div>
+        <ul class="pricing-list">
+          <li>✔ Multi-walker management</li>
+          <li>✔ Analytics dashboard</li>
+          <li>✔ Priority support</li>
+          <li>✔ White-label branding</li>
+        </ul>
+        <a href="mailto:hello@pupsandparks.com" class="btn btn-outline btn-pill">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container card lift">
+      <h3 class="h3">Frequently asked</h3>
+      <div class="grid-2 mt-4">
+        <div>
+          <strong>Do owners pay anything?</strong>
+          <p class="muted">No — booking is free. Walkers pay a simple flat fee.</p>
+        </div>
+        <div>
+          <strong>How do payouts work?</strong>
+          <p class="muted">Walkers receive instant payouts to their chosen account.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-inner container">
       <div class="footer-brand">🐾 Pups & Parks™</div>
