@@ -29,3 +29,78 @@
   box-shadow: 0 6px 20px rgba(0,0,0,.35);
   font-size: 0.9rem;
 }
+/* === Modernization Patch === */
+
+/* Hero */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s7);
+  align-items: center;
+}
+.hero-media {
+  position: relative;
+}
+.hero-media img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  object-fit: cover;
+}
+.hero-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+  font-size: 0.9rem;
+  animation: fadeInUp .6s ease both;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Feature Cards */
+.feature-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--s5);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Buttons */
+.btn-pill {
+  border-radius: 999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Sections */
+.section { padding: var(--s8) var(--s4); }
+.section-tight { padding: var(--s6) var(--s4); }
+
+/* Typography polish */
+.h1, .h2, .h3 {
+  letter-spacing: -0.02em;
+}
+.sub {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
